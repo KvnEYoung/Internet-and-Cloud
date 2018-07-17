@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2>Movie Reviews</h2>
+
+    <table border="1" cellspacing="0">
+    <tr>
+    <td> Movie </td>
+    <td> Year </td>
+    <td> Genre </td>
+    <td> Rating </td>
+    <td> Review </td>
+    <td> Reviewer </td>
+    </tr>
+
+    {% for entry in reviews %}
+    <tr>
+    <td>{{reviews[entry].movie}} </td>
+    <td>{{reviews[entry].year}} </td>
+    <td>{{reviews[entry].genre}} </td>
+    <td>{{reviews[entry].rating}} </td>
+    <td>{{reviews[entry].review}} </td>
+    <td>{{reviews[entry].reviewer}} </td>
+    </tr>
+    {% endfor %}
+    </table>
+    <br>
+
+    <a href="{{ url_for('index') }}">Main Page</a>
+
+{% endblock %}
