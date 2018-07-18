@@ -12,16 +12,8 @@
     <td> Reviewer </td>
     </tr>
 
-    {% for entry in reviews %}
-    <tr>
-    <td>{{reviews[entry].movie}} </td>
-    <td>{{reviews[entry].year}} </td>
-    <td>{{reviews[entry].genre}} </td>
-    <td>{{reviews[entry].rating}} </td>
-    <td>{{reviews[entry].review}} </td>
-    <td>{{reviews[entry].reviewer}} </td>
+    <tr>{{reviews.items()}}</tr>
     </tr>
-    {% endfor %}
     </table>
     <br>
 
