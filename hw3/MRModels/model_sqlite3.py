@@ -8,6 +8,10 @@ class model(Model):
         # Make sure our database exists
         connection = sqlite3.connect(DB_FILE)
         cursor = connection.cursor()
+        try:
+            cursor.execute("select count(rowid) from reviews")
+        except sqlite3.OperationalError:
+            cursor.execute("create table reviews (movie text, year integer, genre text, rating integer, review text, reviewer text)")
         cursor.close()
 
     def select(self):
