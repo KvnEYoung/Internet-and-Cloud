@@ -18,5 +18,10 @@ def reviews():
     reviews = [dict(movie=row[0], year=row[1], genre=row[2], rating=row[3], review=row[4], reviewer=row[5]) for row in model.select()]
     return render_template('reviews.html', reviews=reviews)
 
+@app.route('/newreview')
+def newreview():
+    """ Webpage to add a new movie review """
+    return render_template('newreview.html')
+
 if __name__ == '__main__':
     app.run(port=8000, debug=True)
