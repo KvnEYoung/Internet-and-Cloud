@@ -15,7 +15,7 @@ def index():
 @app.route('/reviews')
 def reviews():
     """ Displays all the movie reviews within a webpage """
-    reviews = model.select()
+    reviews = [dict(movie=row[0], year=row[1], genre=row[2], rating=row[3], review=row[4], reviewer=row[5]) for row in model.select()]
     return render_template('reviews.html', reviews=reviews)
 
 if __name__ == '__main__':
