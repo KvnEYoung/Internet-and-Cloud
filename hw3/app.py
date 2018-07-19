@@ -21,9 +21,13 @@ def reviews():
 @app.route('/newreview', methods=['GET','POST'])
 def newreview():
     """ Webpage to add a new movie review """
-    #model.insert(request.form['movie'], request.form['year'], request.form['genre'],
-    #request.form['rating'], request.form['review'], request.form['reviewer'])
-    return render_template('newreview.html')
+    if request.method == 'POST':
+        model.insert(request.form['movie'], request.form['year'], request.form['genre'],
+        request.form['rating'], request.form['review'], request.form['reviewer'])
+        return redirect(url_for('reviews'))
+
+    else:
+        return render_template('newreview.html')
 
 if __name__ == '__main__':
     app.run(port=8000, debug=True)
