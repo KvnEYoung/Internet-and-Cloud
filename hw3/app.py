@@ -25,7 +25,6 @@ def newreview():
         model.insert(request.form['movie'], request.form['year'], request.form['genre'],
         request.form['rating'], request.form['review'], request.form['reviewer'])
         return redirect(url_for('reviews'))
-
     else:
         return render_template('newreview.html')
 

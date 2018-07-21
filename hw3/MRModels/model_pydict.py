@@ -5,15 +5,15 @@ class model(Model):
     def __init__(self):
         """ Initializes the moviereviews dictionary and then adds the hardcoded movie reviews """
         self.moviereviews = {}
-        self.moviereviews["movie0"] = { "movie":"The Purge", "year":2013, "genre":"Horror", "rating":3,"review":"Horrible", "reviewer": "John Doe"}
-        self.moviereviews["movie1"] = { "movie":"Star Wars", "year":1978, "genre":"Sci-Fi", "rating":10,"review":"Excellent", "reviewer": "Johnny Doe"}
-        self.moviereviews["movie2"] = { "movie":"Avengers", "year":2012, "genre":"Sci-Fi", "rating":9,"review":"Very good", "reviewer": "Jane Doe"}
-        self.moviereviews["movie3"] = { "movie":"Deadpool", "year":2016, "genre":"Sci-Fi", "rating":9,"review":"Great movie", "reviewer": "Jimmy Doe"}
-        self.moviereviews["movie4"] = { "movie":"Harry Potter and the Sorcerer's Stone", "year":2001, "genre":"Fantasy", "rating":10,"review":"Fantastic", "reviewer": "Jonathan Doe"}
-        self.moviereviews["movie5"] = { "movie":"Pitch Perfect", "year":2012, "genre":"Comedy", "rating":8,"review":"Funny movie", "reviewer": "Ginger Doe"}
+        self.insert("The Purge", 2013, "Horror", 3, "Horrible", "John Doe")
+        self.insert("Star Wars", 1978, "Sci-Fi", 10, "Excellent", "Johnny Doe")
+        self.insert("Avengers", 2012, "Sci-Fi", 9, "Very good", "Jane Doe")
+        self.insert("Deadpool", 2016, "Sci-Fi", 9, "Great movie", "Jimmy Doe")
+        self.insert("Harry Potter and the Sorcerer's Stone", 2001, "Fantasy", 10, "Fantastic", "Jonathan Doe")
+        self.insert("Pitch Perfect", 2012, "Comedy", 8, "Funny movie", "Ginger Doe")
 
     def select(self):
-        """ Returns all the moviereviews dictionary entries, with each entry containing
+        """ Returns all the moviereviews dictionary entries converted to a list for the html webpage, with each entry containing
         the movie title, year, genre, rating, review and reviewer """
         templist = []
         for key in self.moviereviews.keys():
