@@ -1,9 +1,9 @@
-""" Python dictionary model """
+""" Python dictionary model. """
 from .Model import Model
 
 class model(Model):
     def __init__(self):
-        """ Initializes the moviereviews dictionary and then adds the hardcoded movie reviews """
+        """ Initializes the moviereviews dictionary and then calls insert to add the hardcoded movie reviews. """
         self.moviereviews = {}
         self.insert("The Purge", 2013, "Horror", 3, "Horrible", "John Doe")
         self.insert("Star Wars", 1978, "Sci-Fi", 10, "Excellent", "Johnny Doe")
@@ -14,7 +14,7 @@ class model(Model):
 
     def select(self):
         """ Returns all the moviereviews dictionary entries converted to a list for the html webpage, with each entry containing
-        the movie title, year, genre, rating, review and reviewer """
+        the movie title, year, genre, rating, review and reviewer. """
         templist = []
         for key in self.moviereviews.keys():
             review = self.moviereviews[key]
@@ -23,7 +23,7 @@ class model(Model):
         return templist
 
     def insert(self, movie, year, genre, rating, review, reviewer):
-        """ Inserts movie reviews (title, year, genre, rating, review and reviewer) into the moviereview dictionary """
+        """ Inserts movie reviews (title, year, genre, rating, review and reviewer) into the moviereview dictionary. """
         movienumber = "movie" + str(len(self.moviereviews.keys()))
         self.moviereviews[movienumber] = { "movie":movie, "year":year, "genre":genre, "rating":rating, "review":review, "reviewer":reviewer}
         return True

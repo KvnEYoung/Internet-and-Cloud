@@ -1,12 +1,12 @@
-""" Python database model """
+""" Python database model. """
 from .Model import Model
 import sqlite3
-DB_FILE = 'reviews.db'    # file for our Database
+database = 'reviews.db'    # Database file for selections/insertions
 
 class model(Model):
     def __init__(self):
-        # Make sure our database exists
-        connection = sqlite3.connect(DB_FILE)
+        """ Verifying if the reviews table exists within the database and if not creates it. """
+        connection = sqlite3.connect(database)
         cursor = connection.cursor()
         try:
             cursor.execute("select count(rowid) from reviews")
@@ -15,23 +15,19 @@ class model(Model):
         cursor.close()
 
     def select(self):
-        """
-        Gets all rows from the database
-        Each row contains: name, email, date, message
-        :return: List of lists containing all rows of database
-        """
-        connection = sqlite3.connect(DB_FILE)
+        """ Returns all the database reviews converted to a list for the html webpage, with each row containing
+        the movie title, year, genre, rating, review and reviewer. """
+        connection = sqlite3.connect(database)
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM reviews")
         return cursor.fetchall()
 
     def insert(self, movie, year, genre, rating, review, reviewer):
-        values = {'movie':movie, 'year':year, 'genre':genre, 'rating':rating,
-        'review':review, 'reviewer':reviewer}
-        connection = sqlite3.connect(DB_FILE)
+        """ Inserts movie reviews (title, year, genre, rating, review and reviewer) into the database reviews table. """
+        values = {'movie':movie, 'year':year, 'genre':genre, 'rating':rating, 'review':review, 'reviewer':reviewer}
+        connection = sqlite3.connect(database)
         cursor = connection.cursor()
         cursor.execute("insert into reviews (movie, year, genre, rating, review, reviewer) VALUES (:movie, :year, :genre, :rating, :review, :reviewer)", values)
-
         connection.commit()
         cursor.close()
         return True

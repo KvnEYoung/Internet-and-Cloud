@@ -1,4 +1,4 @@
-""" Gets the correct Model for the application """
+""" Gets the correct Model for the application. """
 #model_version = 'Dictionary'
 model_version = 'SQL'
 
