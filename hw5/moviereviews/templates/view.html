@@ -36,12 +36,12 @@
     <img class="book-image" src="https://storage.googleapis.com/cloud-training/CP100/Bookshelf/bookplaceholder.jpg">
   </div>
   <div class="media-body">
-    <h4 class="book-title">
-      {{book.title}}
-      <small>{{book.publishedDate}}</small>
+    <h4 class="book-movie">
+      {{book.movie}}
+      <small>{{book.year}}</small>
     </h4>
-    <h5 class="book-author">By {{book.author|default('Unknown', True)}}</h5>
-    <p class="book-description">{{book.description}}</p>
+    <h5 class="book-genre">By {{book.genre|default('Unknown', True)}}</h5>
+    <p class="book-rating">{{book.rating}}</p>
   </div>
 </div>
 
