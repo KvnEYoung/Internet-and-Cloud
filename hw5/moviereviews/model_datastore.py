@@ -13,46 +13,23 @@
 # limitations under the License.
 
 from flask import current_app
-from .Model import Model
 from google.appengine.datastore.datastore_query import Cursor
 from google.appengine.ext import ndb
 
 
 builtin_list = list
 
-class model(Model):
-    def __init__(self):
-        """ Verifying if the reviews table exists within the database and if not creates it. """
-        pass
 
-    def select(self):
-        """ Returns all the database reviews converted to a list for the html webpage, with each row containing
-        the movie title, year, genre, rating, review and reviewer. """
-        pass
+def init_app(app):
+    pass
 
-    def insert(self, movie, year, genre, rating, review, reviewer):
-        """ Inserts movie reviews (title, year, genre, rating, review and reviewer) into the database reviews table. """
-        review = Review()
-        review.movie = movie
-        review.year = year
-        review.genre = genre
-        review.rating = rating
-        review.review = review
-        review.reviewer = reviewer
-        review.put()
-        return True
-
-#def init_app(app):
-    #pass
 
 # [START model]
-class Review(ndb.Model):
-    movie = ndb.StringProperty()
-    year = ndb.IntegerProperty()
-    genre = ndb.StringProperty()
-    rating = ndb.IntegerProperty()
-    review = ndb.StringProperty()
-    reviewer = ndb.StringProperty()
+class Book(ndb.Model):
+    author = ndb.StringProperty()
+    description = ndb.StringProperty(indexed=False)
+    publishedDate = ndb.StringProperty()
+    title = ndb.StringProperty()
 # [END model]
 
 
@@ -86,7 +63,7 @@ def from_datastore(entity):
 def list(limit=10, cursor=None):
     if cursor:
         cursor = Cursor(urlsafe=cursor)
-    query = Review.query().order(Review.title)
+    query = Book.query().order(Book.title)
     entities, cursor, more = query.fetch_page(limit, start_cursor=cursor)
     entities = builtin_list(map(from_datastore, entities))
     return entities, cursor.urlsafe() if len(entities) == limit else None
@@ -107,7 +84,7 @@ def update(data, id=None):
         key = ndb.Key('Book', int(id))
         book = key.get()
     else:
-        review = Review()
+        book = Book()
     book.author = data['author']
     book.description = data['description']
     book.publishedDate = data['publishedDate']
@@ -119,3 +96,8 @@ create = update
 # [END update]
 
 
+# [START delete]
+def delete(id):
+    key = ndb.Key('Book', int(id))
+    key.delete()
+# [END delete]
