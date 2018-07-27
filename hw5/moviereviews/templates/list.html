@@ -24,20 +24,40 @@
   Add moviereview
 </a>
 
-{% for moviereview in moviereviews %}
+<table border="1">
+    <tr>
+    <td> Movie </td>
+    <td> Year </td>
+    <td> Genre </td>
+    <td> Rating </td>
+    <td> Review </td>
+    <td> Reviewer </td>
+    </tr>
+
+{% for review in moviereviews %}
 <div class="media">
-  <a href="/moviereviews/{{moviereview.id}}">
-    <div class="media-left">
-      <img src="https://storage.googleapis.com/cloud-training/CP100/Bookshelf/bookplaceholder.jpg">
-    </div>
+  <a href="/moviereviews/{{review.id}}">
     <div class="media-body">
-      <h4>{{moviereview.movie}}</h4>
-      <p>{{moviereview.year}}</p>
+      <tr>
+          <td>{{review.movie}}</td>
+          <td>{{review.year}}</td>
+          <td>{{review.genre}}</td>
+          <td>{{review.rating}}</td>
+          <td>{{review.review}}</td>
+          <td>{{review.reviewer}}</td>
+        </tr>
     </div>
   </a>
 </div>
 {% else %}
-<p>No movies found</p>
+<tr>
+    <td>No</td>
+    <td>Movie</td>
+    <td>Reviews</td>
+    <td>Have</td>
+    <td>Been</td>
+    <td>Entered</td>
+  </tr>
 {% endfor %}
 
 {% if next_page_token %}
