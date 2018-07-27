@@ -18,42 +18,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h3>{{action}} moviereview</h3>
+<h3>{{action}} Movie Review</h3>
 
-<form method="POST" enctype="multipart/form-data">
+<form method="POST">
+    <p class="heading"> Movie: <input type="text" name="movie" id="movie" value="{{moviereview.movie}}">
 
-  <div class="form-group">
-    <label for="movie">Movie</label>
-    <input type="text" name="movie" id="movie" value="{{moviereview.movie}}" class="form-control"/>
-  </div>
+    <p class="heading"> Year: <input type="number" name="year" id="year" value="{{moviereview.year}}">
 
-  <div class="form-group">
-    <label for="year">Year</label>
-    <input type="number" name="year" id="year" value="{{moviereview.year}}" class="form-control"/>
-  </div>
+    <p class="heading"> Genre: <input type="text" name="genre" id="genre" value="{{moviereview.genre}}">
 
-  <div class="form-group">
-    <label for="genre">Genre</label>
-    <input type="text" name="genre" id="genre" value="{{moviereview.genre}}" class="form-control"/>
-  </div>
+    <p class="heading"> Rating: <input type="number" name="rating" id="rating" value="{{moviereview.rating}}">
 
-  <div class="form-group">
-    <label for="rating">Rating</label>
-    <input type="number" name="rating" id="rating" value="{{moviereview.rating}}" class="form-control"/>
-  </div>
+    <p class="heading"> Review:
+    <textarea rows=5 cols=50 name="review" id="review">{{moviereview.review}}</textarea></p>
 
-  <div class="form-group">
-    <label for="review">Review</label>
-    <textarea name="review" id="review" class="form-control">{{moviereview.review}}</textarea>
-  </div> 
-
-  <div class="form-group">
-    <label for="reviewer">Reviewer</label>
-    <input type="text" name="reviewer" id="reviewer" value="{{moviereview.reviewer}}" class="form-control"/>
-  </div>
-
-  <button type="submit" class="btn btn-success">Save</button>
-</form>
+    <p class="heading"> Reviewer: <input type="text" name="reviewer" id="reviewer" value="{{moviereview.reviewer}}">
+      
+    <p><button type="submit" class="btn btn-sucess">Submit Review</button></p>
+  </form>
 
 {% endblock %}
 {# [END form] #}
