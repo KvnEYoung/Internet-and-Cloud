@@ -18,9 +18,6 @@ from flask import Blueprint, redirect, render_template, request, url_for
 
 mreviews = Blueprint('mreviews', __name__)
 
-@mreviews.route('/main')
-def main():
-    return render_template("main.html")
 
 # [START list]
 @mreviews.route("/")
@@ -49,7 +46,7 @@ def add():
 
         moviereview = get_model().create(data)
 
-        return redirect(url_for('.list', id=moviereview['id']))
+        return redirect(url_for('.view', id=moviereview['id']))
 
     return render_template("form.html", action="Add", moviereview={})
 # [END add]
@@ -64,7 +61,7 @@ def edit(id):
 
         moviereview = get_model().update(data, id)
 
-        return redirect(url_for('.list', id=moviereview['id']))
+        return redirect(url_for('.view', id=moviereview['id']))
 
     return render_template("form.html", action="Edit", moviereview=moviereview)
 
