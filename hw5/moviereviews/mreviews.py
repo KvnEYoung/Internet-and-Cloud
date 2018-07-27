@@ -23,19 +23,19 @@ mreviews = Blueprint('mreviews', __name__)
 @mreviews.route("/")
 def list():
     token = request.args.get('page_token', None)
-    books, next_page_token = get_model().list(cursor=token)
+    moviereviews, next_page_token = get_model().list(cursor=token)
 
     return render_template(
         "list.html",
-        books=books,
+        moviereviews=moviereviews,
         next_page_token=next_page_token)
 # [END list]
 
 
 @mreviews.route('/<id>')
 def view(id):
-    book = get_model().read(id)
-    return render_template("view.html", book=book)
+    moviereview = get_model().read(id)
+    return render_template("view.html", moviereview=moviereview)
 
 
 # [START add]
@@ -44,26 +44,26 @@ def add():
     if request.method == 'POST':
         data = request.form.to_dict(flat=True)
 
-        book = get_model().create(data)
+        moviereview = get_model().create(data)
 
-        return redirect(url_for('.view', id=book['id']))
+        return redirect(url_for('.view', id=moviereview['id']))
 
-    return render_template("form.html", action="Add", book={})
+    return render_template("form.html", action="Add", moviereview={})
 # [END add]
 
 
 @mreviews.route('/<id>/edit', methods=['GET', 'POST'])
 def edit(id):
-    book = get_model().read(id)
+    moviereview = get_model().read(id)
 
     if request.method == 'POST':
         data = request.form.to_dict(flat=True)
 
-        book = get_model().update(data, id)
+        moviereview = get_model().update(data, id)
 
-        return redirect(url_for('.view', id=book['id']))
+        return redirect(url_for('.view', id=moviereview['id']))
 
-    return render_template("form.html", action="Edit", book=book)
+    return render_template("form.html", action="Edit", moviereview=moviereview)
 
 
 @mreviews.route('/<id>/delete')

@@ -24,7 +24,7 @@
   Add book
 </a>
 
-{% for book in books %}
+{% for moviereview in moviereviews %}
 <div class="media">
   <a href="/moviereviews/{{moviereview.id}}">
     <div class="media-left">
@@ -37,7 +37,7 @@
   </a>
 </div>
 {% else %}
-<p>No books found</p>
+<p>No movies found</p>
 {% endfor %}
 
 {% if next_page_token %}
