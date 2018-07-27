@@ -18,8 +18,11 @@
     <p class="heading"> Reviewer: <input type="text" name="reviewer" id="reviewer" value="{{moviereview.reviewer}}">
 
     <p><button type="submit" style="background-color:#008CBA; color:white; border-radius: 6px">Submit Review</button></p>
-  </form>
-
-  <a href="{{ url_for('.list') }}">Main Page</a>
+</form>
+<br><br>
+  
+<form>
+  <button type="submit" formaction="{{ url_for('.list') }}" style="background-color:#4d0099; color:white; border-radius: 6px">Main Page</button>
+</form>
 
 {% endblock %}

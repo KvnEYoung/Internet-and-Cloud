@@ -22,18 +22,23 @@
 
 <div class="media">
   <div class="media-body">
-    <h4 class="movie-title">Movie: {{moviereview.movie}}</h4>
-    <h5 class="movie-year">Year: {{moviereview.year}}</h5>
-    <h5 class="movie-genre">Genre: {{moviereview.genre}}</h5>
-    <h5 class="movie-rating">Rating: {{moviereview.rating}}</h5>
+    <p class="movie-title">Movie: {{moviereview.movie}}</p>
+    <p class="movie-year">Year: {{moviereview.year}}</p>
+    <p class="movie-genre">Genre: {{moviereview.genre}}</p>
+    <p class="movie-rating">Rating: {{moviereview.rating}}</p>
     <p class="movie-review">Review: {{moviereview.review}}</p>
-    <h5 class="movie-reviewer">Reviewer: {{moviereview.reviewer}}</h5>
+    <p class="movie-reviewer">Reviewer: {{moviereview.reviewer}}</p>
   </div>
 </div>
 
 <form>
   <button type="submit" formaction="/moviereviews/{{moviereview.id}}/edit" style="background-color:#4CAF50; color:white; border-radius: 6px">Edit Movie Review</button>
   <button type="submit" formaction="/moviereviews/{{moviereview.id}}/delete" style="background-color:#f44336; color:white; border-radius: 6px">Delete Movie Review</button>
+</form>
+<br><br>
+  
+<form>
+  <button type="submit" formaction="{{ url_for('.list') }}" style="background-color:#4d0099; color:white; border-radius: 6px">Main Page</button>
 </form>
 
 {% endblock %}
