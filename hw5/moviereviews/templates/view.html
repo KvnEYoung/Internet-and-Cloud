@@ -18,31 +18,29 @@
 
 {% block content %}
 
-<h3>Book</h3>
-
-<div class="btn-group">
-  <a href="/moviereviews/{{moviereview.id}}/edit" class="btn btn-primary btn-sm">
-    <i class="glyphicon glyphicon-edit"></i>
-    Edit Movie Review
-  </a>
-  <a href="/moviereviews/{{moviereview.id}}/delete" class="btn btn-danger btn-sm">
-    <i class="glyphicon glyphicon-trash"></i>
-    Delete Movie Review
-  </a>
-</div>
+<h3>Movie Review</h3>
 
 <div class="media">
-  <div class="media-left">
-    <img class="book-image" src="https://storage.googleapis.com/cloud-training/CP100/Bookshelf/bookplaceholder.jpg">
-  </div>
   <div class="media-body">
-    <h4 class="book-title">
-      {{moviereview.movie}}
-      <small>{{moviereview.year}}</small>
+    <h4 class="movie-title">Movie: {{moviereview.movie}}
+      <small>Year: {{moviereview.year}}</small>
     </h4>
-    <h5 class="book-author">By {{moviereview.genre|default('Unknown', True)}}</h5>
-    <p class="book-description">{{moviereview.rating}}</p>
+    <h5 class="movie-genre">Genre: {{moviereview.genre}}</h5>
+    <h5 class="movie-rating">Rating: {{moviereview.rating}}</h5>
+    <p class="movie-review">Review: {{moviereview.review}}</p>
+    <h5 class="movie-reviewer">Reviewer: {{moviereview.reviewer}}</h5>
   </div>
 </div>
+
+<div class="btn-group">
+    <a href="/moviereviews/{{moviereview.id}}/edit" class="btn btn-primary btn-sm">
+      <i class="glyphicon glyphicon-edit"></i>
+      Edit Movie Review
+    </a>
+    <a href="/moviereviews/{{moviereview.id}}/delete" class="btn btn-danger btn-sm">
+      <i class="glyphicon glyphicon-trash"></i>
+      Delete Movie Review
+    </a>
+  </div>
 
 {% endblock %}

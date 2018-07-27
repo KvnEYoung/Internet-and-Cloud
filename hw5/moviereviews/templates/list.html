@@ -18,11 +18,7 @@
 
 {% block content %}
 
-<h3>Movie Reviews</h3>
-<a href="/moviereviews/add" class="btn btn-success btn-sm">
-  <i class="glyphicon glyphicon-plus"></i>
-  Add moviereview
-</a>
+<h2>Movie Reviews</h2>
 
 <table border="2" cellspacing ="20">
     <tr>
@@ -58,6 +54,11 @@
   </tr>
 {% endfor %}
 </table>
+
+<a href="/moviereviews/add" class="btn btn-success btn-sm">
+  <i class="glyphicon glyphicon-plus"></i>
+  Add moviereview
+</a>
 
 {% if next_page_token %}
 <nav>
