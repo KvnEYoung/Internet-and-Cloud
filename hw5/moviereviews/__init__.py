@@ -67,5 +67,4 @@ def get_model():
         raise ValueError(
             "No appropriate databackend configured. "
             "Please specify datastore.")
-
     return model

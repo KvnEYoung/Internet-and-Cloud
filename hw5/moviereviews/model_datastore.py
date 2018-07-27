@@ -25,7 +25,7 @@ def init_app(app):
 
 
 # [START model]
-class Book(ndb.Model):
+class MovieReview(ndb.Model):
     movie = ndb.StringProperty()
     year = ndb.IntegerProperty()
     genre = ndb.StringProperty()
@@ -63,7 +63,7 @@ def from_datastore(entity):
 def list(limit=10, cursor=None):
     if cursor:
         cursor = Cursor(urlsafe=cursor)
-    query = Book.query().order(Book.movie)
+    query = MovieReview.query().order(MovieReview.movie)
     entities, cursor, more = query.fetch_page(limit, start_cursor=cursor)
     entities = builtin_list(map(from_datastore, entities))
     return entities, cursor.urlsafe() if len(entities) == limit else None
@@ -72,7 +72,7 @@ def list(limit=10, cursor=None):
 
 # [START read]
 def read(id):
-    moviereview_key = ndb.Key('Book', int(id))
+    moviereview_key = ndb.Key('MovieReview', int(id))
     results = moviereview_key.get()
     return from_datastore(results)
 # [END read]
@@ -81,10 +81,10 @@ def read(id):
 # [START update]
 def update(data, id=None):
     if id:
-        key = ndb.Key('Book', int(id))
+        key = ndb.Key('MovieReview', int(id))
         moviereview = key.get()
     else:
-        moviereview = Book()
+        moviereview = MovieReview()
     moviereview.movie = data['movie']
     moviereview.year = int(data['year'])
     moviereview.genre = data['genre']
@@ -98,6 +98,6 @@ create = update
 
 # [START delete]
 def delete(id):
-    key = ndb.Key('Book', int(id))
+    key = ndb.Key('MovieReview', int(id))
     key.delete()
 # [END delete]
