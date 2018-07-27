@@ -37,6 +37,9 @@
 {% for moviereview in moviereviews %}
 <div class="media">
   <a href="/moviereviews/{{moviereview.id}}">
+    <div class="media-left">
+        <img src="https://storage.googleapis.com/cloud-training/CP100/Bookshelf/bookplaceholder.jpg">
+    </div>
     <div class="media-body">
       <tr>
           <td>{{moviereview.movie}}</td>
