@@ -30,6 +30,8 @@ class MovieReview(ndb.Model):
     year = ndb.IntegerProperty()
     genre = ndb.StringProperty()
     rating = ndb.IntegerProperty()
+    review = ndb.StringProperty()
+    reviewer = ndb.StringProperty()
 # [END model]
 
 
@@ -54,6 +56,8 @@ def from_datastore(entity):
     moviereview['year'] = entity.year
     moviereview['genre'] = entity.genre
     moviereview['rating'] = entity.rating
+    moviereview['review'] = entity.review
+    moviereview['reviewer'] = entity.reviewer
     return moviereview
 # [END from_datastore]
 
@@ -89,6 +93,8 @@ def update(data, id=None):
     moviereview.year = int(data['year'])
     moviereview.genre = data['genre']
     moviereview.rating = int(data['rating'])
+    moviereview.review = data['review']
+    moviereview.reviewer = data['reviewer']
     moviereview.put()
     return from_datastore(moviereview)
 
