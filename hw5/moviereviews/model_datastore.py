@@ -27,7 +27,7 @@ def init_app(app):
 # [START model]
 class Book(ndb.Model):
     movie = ndb.StringProperty()
-    year = ndb.IntegerProperty())
+    year = ndb.IntegerProperty()
     genre = ndb.StringProperty()
     rating = ndb.IntegerProperty()
 # [END model]
