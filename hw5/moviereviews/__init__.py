@@ -38,7 +38,7 @@ def create_app(config, debug=False, testing=False, config_overrides=None):
 
     # Register the Bookshelf mreviews blueprint.
     from .mreviews import mreviews
-    app.register_blueprint(mreviews, url_prefix='/books')
+    app.register_blueprint(mreviews, url_prefix='/moviereviews')
 
     # Add a default root route.
     @app.route("/")
