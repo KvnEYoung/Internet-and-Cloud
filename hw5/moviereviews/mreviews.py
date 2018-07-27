@@ -16,11 +16,11 @@ from moviereviews import get_model
 from flask import Blueprint, redirect, render_template, request, url_for
 
 
-crud = Blueprint('crud', __name__)
+mreviews = Blueprint('mreviews', __name__)
 
 
 # [START list]
-@crud.route("/")
+@mreviews.route("/")
 def list():
     token = request.args.get('page_token', None)
     books, next_page_token = get_model().list(cursor=token)
@@ -32,14 +32,14 @@ def list():
 # [END list]
 
 
-@crud.route('/<id>')
+@mreviews.route('/<id>')
 def view(id):
     book = get_model().read(id)
     return render_template("view.html", book=book)
 
 
 # [START add]
-@crud.route('/add', methods=['GET', 'POST'])
+@mreviews.route('/add', methods=['GET', 'POST'])
 def add():
     if request.method == 'POST':
         data = request.form.to_dict(flat=True)
@@ -52,7 +52,7 @@ def add():
 # [END add]
 
 
-@crud.route('/<id>/edit', methods=['GET', 'POST'])
+@mreviews.route('/<id>/edit', methods=['GET', 'POST'])
 def edit(id):
     book = get_model().read(id)
 
@@ -66,7 +66,7 @@ def edit(id):
     return render_template("form.html", action="Edit", book=book)
 
 
-@crud.route('/<id>/delete')
+@mreviews.route('/<id>/delete')
 def delete(id):
     get_model().delete(id)
     return redirect(url_for('.list'))
