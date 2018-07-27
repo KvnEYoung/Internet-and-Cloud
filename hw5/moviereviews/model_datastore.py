@@ -86,9 +86,9 @@ def update(data, id=None):
     else:
         moviereview = Book()
     moviereview.movie = data['movie']
-    moviereview.year = data['year']
+    moviereview.year = int(data['year'])
     moviereview.genre = data['genre']
-    moviereview.rating = data['rating']
+    moviereview.rating = int(data['rating'])
     moviereview.put()
     return from_datastore(moviereview)
 
