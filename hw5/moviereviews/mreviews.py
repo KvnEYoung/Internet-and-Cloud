@@ -20,7 +20,7 @@ mreviews = Blueprint('mreviews', __name__)
 
 
 # [START list]
-@mreviews.route("/")
+@mreviews.route('/list')
 def list():
     token = request.args.get('page_token', None)
     moviereviews, next_page_token = get_model().list(cursor=token)
@@ -31,7 +31,7 @@ def list():
         next_page_token=next_page_token)
 # [END list]
 
-@mreviews.route('/main')
+@mreviews.route("/")
 def main():
     return render_template("main.html")
 
