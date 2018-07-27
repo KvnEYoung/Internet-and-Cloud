@@ -31,6 +31,9 @@ def list():
         next_page_token=next_page_token)
 # [END list]
 
+@mreviews.route('/main')
+def main():
+    return render_template("main.html")
 
 @mreviews.route('/<id>')
 def view(id):
