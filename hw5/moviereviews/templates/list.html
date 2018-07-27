@@ -55,11 +55,6 @@
 {% endfor %}
 </table>
 
-<a href="/moviereviews/add" class="btn btn-success btn-sm">
-  <i class="glyphicon glyphicon-plus"></i>
-  Add moviereview
-</a>
-
 {% if next_page_token %}
 <nav>
   <ul class="pager">
@@ -67,5 +62,12 @@
   </ul>
 </nav>
 {% endif %}
+
+<br><br>
+
+<a href="/moviereviews/add" class="btn btn-success btn-sm">
+  <i class="glyphicon glyphicon-plus"></i>
+  Add moviereview
+</a>
 
 {% endblock %}
