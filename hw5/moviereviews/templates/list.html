@@ -24,7 +24,7 @@
   Add moviereview
 </a>
 
-<table border="1" cellspacing ="10">
+<table border="2" cellspacing ="20">
     <tr>
     <td> Movie </td>
     <td> Year </td>
@@ -36,18 +36,16 @@
 
 {% for moviereview in moviereviews %}
 <div class="media">
-  <a href="/moviereviews/{{moviereview.id}}">
-    <div class="media-body">
-      <tr>
-          <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.movie}}</a>></td>
-          <td>{{moviereview.year}}</td>
-          <td>{{moviereview.genre}}</td>
-          <td>{{moviereview.rating}}</td>
-          <td>{{moviereview.review}}</td>
-          <td>{{moviereview.reviewer}}</td>
-        </tr>
-    </div>
-  </a>
+  <div class="media-body">
+    <tr>
+      <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.movie}}</a></td>
+      <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.year}}</a></td>
+      <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.genre}}</a></td>
+      <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.rating}}</a></td>
+      <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.review}}</a></td>
+      <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.reviewer}}</a></td>
+    </tr>
+  </div>
 </div>
 {% else %}
 <tr>
