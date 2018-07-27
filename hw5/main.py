@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import bookshelf
+import moviereviews
 import config
 
 
-app = bookshelf.create_app(config)
+app = moviereviews.create_app(config)
 
 
 # This is only used when running locally. When running live, gunicorn runs

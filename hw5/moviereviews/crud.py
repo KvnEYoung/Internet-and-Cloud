@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from bookshelf import get_model
+from moviereviews import get_model
 from flask import Blueprint, redirect, render_template, request, url_for
 
 
