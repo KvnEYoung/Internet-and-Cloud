@@ -41,7 +41,7 @@ def create_app(config, debug=False, testing=False, config_overrides=None):
     app.register_blueprint(mreviews, url_prefix='/moviereviews')
 
     # Add a default root route.
-    @app.route('/')
+    @app.route("/")
     def index():
         return redirect(url_for('mreviews.reviews'))
 
