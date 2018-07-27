@@ -2,27 +2,27 @@
 
 {% block content %}
 
-<h2 style="text-align: center;">Movie Reviews</h2>
+<h2 style="text-align: center; table-layout: fixed">Movie Reviews</h2>
 
 <table style="margin-left: auto; margin-right: auto" border="1" cellspacing ="0" cellpadding="2">
   <tr>
-    <td> Movie </td>
-    <td> Year </td>
-    <td> Genre </td>
-    <td> Rating </td>
-    <td> Review </td>
-    <td> Reviewer </td>
+    <th style="width: 20%"> Movie </th>
+    <th> Year </th>
+    <th> Genre </th>
+    <th> Rating </th>
+    <th style="width: 30%"> Review </th>
+    <th style="width: 20%"> Reviewer </th>
   </tr>
 
 {% for moviereview in moviereviews %}
 
 <tr>
-  <td style="white-space:nowrap;"><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.movie}}</a></td>
+  <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.movie}}</a></td>
   <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.year}}</a></td>
   <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.genre}}</a></td>
   <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.rating}}</a></td>
-  <td style="white-space:nowrap;"><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.review}}</a></td>
-  <td style="white-space:nowrap;"><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.reviewer}}</a></td>
+  <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.review}}</a></td>
+  <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.reviewer}}</a></td>
 </tr>
 
 {% else %}
