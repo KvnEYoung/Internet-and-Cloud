@@ -21,11 +21,11 @@
 <h3>Book</h3>
 
 <div class="btn-group">
-  <a href="/moviereviews/{{book.id}}/edit" class="btn btn-primary btn-sm">
+  <a href="/moviereviews/{{moviereview.id}}/edit" class="btn btn-primary btn-sm">
     <i class="glyphicon glyphicon-edit"></i>
     Edit book
   </a>
-  <a href="/moviereviews/{{book.id}}/delete" class="btn btn-danger btn-sm">
+  <a href="/moviereviews/{{moviereview.id}}/delete" class="btn btn-danger btn-sm">
     <i class="glyphicon glyphicon-trash"></i>
     Delete book
   </a>
@@ -37,11 +37,11 @@
   </div>
   <div class="media-body">
     <h4 class="book-title">
-      {{book.title}}
-      <small>{{book.publishedDate}}</small>
+      {{moviereview.title}}
+      <small>{{moviereview.publishedDate}}</small>
     </h4>
-    <h5 class="book-author">By {{book.author|default('Unknown', True)}}</h5>
-    <p class="book-description">{{book.description}}</p>
+    <h5 class="book-author">By {{moviereview.author|default('Unknown', True)}}</h5>
+    <p class="book-description">{{moviereview.description}}</p>
   </div>
 </div>
 

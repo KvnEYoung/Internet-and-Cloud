@@ -48,13 +48,13 @@ def from_datastore(entity):
         return None
     if isinstance(entity, builtin_list):
         entity = entity.pop()
-    book = {}
-    book['id'] = entity.key.id()
-    book['author'] = entity.author
-    book['description'] = entity.description
-    book['publishedDate'] = entity.publishedDate
-    book['title'] = entity.title
-    return book
+    moviereview = {}
+    moviereview['id'] = entity.key.id()
+    moviereview['author'] = entity.author
+    moviereview['description'] = entity.description
+    moviereview['publishedDate'] = entity.publishedDate
+    moviereview['title'] = entity.title
+    return moviereview
 # [END from_datastore]
 
 
@@ -72,8 +72,8 @@ def list(limit=10, cursor=None):
 
 # [START read]
 def read(id):
-    book_key = ndb.Key('Book', int(id))
-    results = book_key.get()
+    moviereview_key = ndb.Key('Book', int(id))
+    results = moviereview_key.get()
     return from_datastore(results)
 # [END read]
 
@@ -82,15 +82,15 @@ def read(id):
 def update(data, id=None):
     if id:
         key = ndb.Key('Book', int(id))
-        book = key.get()
+        moviereview = key.get()
     else:
-        book = Book()
-    book.author = data['author']
-    book.description = data['description']
-    book.publishedDate = data['publishedDate']
-    book.title = data['title']
-    book.put()
-    return from_datastore(book)
+        moviereview = Book()
+    moviereview.author = data['author']
+    moviereview.description = data['description']
+    moviereview.publishedDate = data['publishedDate']
+    moviereview.title = data['title']
+    moviereview.put()
+    return from_datastore(moviereview)
 
 create = update
 # [END update]

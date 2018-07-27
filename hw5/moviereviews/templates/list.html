@@ -26,13 +26,13 @@
 
 {% for book in books %}
 <div class="media">
-  <a href="/moviereviews/{{book.id}}">
+  <a href="/moviereviews/{{moviereview.id}}">
     <div class="media-left">
       <img src="https://storage.googleapis.com/cloud-training/CP100/Bookshelf/bookplaceholder.jpg">
     </div>
     <div class="media-body">
-      <h4>{{book.title}}</h4>
-      <p>{{book.author}}</p>
+      <h4>{{moviereview.title}}</h4>
+      <p>{{moviereview.author}}</p>
     </div>
   </a>
 </div>
