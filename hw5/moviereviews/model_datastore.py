@@ -26,10 +26,10 @@ def init_app(app):
 
 # [START model]
 class Book(ndb.Model):
-    author = ndb.StringProperty()
-    description = ndb.StringProperty(indexed=False)
-    publishedDate = ndb.StringProperty()
-    title = ndb.StringProperty()
+    movie = ndb.StringProperty()
+    year = ndb.IntegerProperty())
+    genre = ndb.StringProperty()
+    rating = ndb.IntegerProperty()
 # [END model]
 
 
@@ -50,10 +50,10 @@ def from_datastore(entity):
         entity = entity.pop()
     moviereview = {}
     moviereview['id'] = entity.key.id()
-    moviereview['author'] = entity.author
-    moviereview['description'] = entity.description
-    moviereview['publishedDate'] = entity.publishedDate
-    moviereview['title'] = entity.title
+    moviereview['movie'] = entity.movie
+    moviereview['year'] = entity.year
+    moviereview['genre'] = entity.genre
+    moviereview['rating'] = entity.rating
     return moviereview
 # [END from_datastore]
 
@@ -63,7 +63,7 @@ def from_datastore(entity):
 def list(limit=10, cursor=None):
     if cursor:
         cursor = Cursor(urlsafe=cursor)
-    query = Book.query().order(Book.title)
+    query = Book.query().order(Book.movie)
     entities, cursor, more = query.fetch_page(limit, start_cursor=cursor)
     entities = builtin_list(map(from_datastore, entities))
     return entities, cursor.urlsafe() if len(entities) == limit else None
@@ -85,10 +85,10 @@ def update(data, id=None):
         moviereview = key.get()
     else:
         moviereview = Book()
-    moviereview.author = data['author']
-    moviereview.description = data['description']
-    moviereview.publishedDate = data['publishedDate']
-    moviereview.title = data['title']
+    moviereview.movie = data['movie']
+    moviereview.year = data['year']
+    moviereview.genre = data['genre']
+    moviereview.rating = data['rating']
     moviereview.put()
     return from_datastore(moviereview)
 

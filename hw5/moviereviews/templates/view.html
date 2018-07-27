@@ -37,11 +37,11 @@
   </div>
   <div class="media-body">
     <h4 class="book-title">
-      {{moviereview.title}}
-      <small>{{moviereview.publishedDate}}</small>
+      {{moviereview.movie}}
+      <small>{{moviereview.year}}</small>
     </h4>
-    <h5 class="book-author">By {{moviereview.author|default('Unknown', True)}}</h5>
-    <p class="book-description">{{moviereview.description}}</p>
+    <h5 class="book-author">By {{moviereview.genre|default('Unknown', True)}}</h5>
+    <p class="book-description">{{moviereview.rating}}</p>
   </div>
 </div>
 
