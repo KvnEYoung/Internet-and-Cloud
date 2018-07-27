@@ -18,9 +18,6 @@ from flask import Blueprint, redirect, render_template, request, url_for
 
 mreviews = Blueprint('mreviews', __name__)
 
-@mreviews.route('/main')
-def main():
-    return render_template("main.html")
 
 # [START list]
 @mreviews.route("/")
@@ -73,3 +70,4 @@ def edit(id):
 def delete(id):
     get_model().delete(id)
     return redirect(url_for('.list'))
+
