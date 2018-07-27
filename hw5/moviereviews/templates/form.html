@@ -17,12 +17,12 @@
 
     <p class="heading"> Reviewer: <input type="text" name="reviewer" id="reviewer" value="{{moviereview.reviewer}}">
 
-    <p><button type="submit" style="background-color:#008CBA; color:white; border-radius: 6px">Submit Review</button></p>
+    <p><button type="submit" style="background-color:#008CBA; color:white; border-radius: 6px; padding-left: 1.6em; padding-right: 1.6em;">Submit Review</button></p>
 </form>
 <br><br>
   
 <form>
-  <button type="submit" formaction="{{ url_for('.list') }}" style="background-color:#4d0099; color:white; border-radius: 6px">Main Page</button>
+  <button type="submit" formaction="{{ url_for('main') }}" style="background-color:#4d0099; color:white; border-radius: 6px; padding-left: 2.6em; padding-right: 2.6em;">Main Page</button>
 </form>
 
 {% endblock %}

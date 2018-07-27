@@ -6,23 +6,23 @@
 
 <div class="media" style="border:1px solid black;">
   <div class="media-body">
-    <p class="heading">Movie: {{moviereview.movie}}</p>
-    <p class="heading">Year: {{moviereview.year}}</p>
-    <p class="heading">Genre: {{moviereview.genre}}</p>
-    <p class="heading">Rating: {{moviereview.rating}}</p>
-    <p class="heading">Review: {{moviereview.review}}</p>
-    <p class="heading">Reviewer: {{moviereview.reviewer}}</p>
+    <p class="heading" style="border:1px solid blue;">Movie: {{moviereview.movie}}</p>
+    <p class="heading" style="border:1px solid blue;">Year: {{moviereview.year}}</p>
+    <p class="heading" style="border:1px solid blue;">Genre: {{moviereview.genre}}</p>
+    <p class="heading" style="border:1px solid blue;">Rating: {{moviereview.rating}}</p>
+    <p class="heading" style="border:1px solid blue;">Review: {{moviereview.review}}</p>
+    <p class="heading" style="border:1px solid blue;">Reviewer: {{moviereview.reviewer}}</p>
   </div>
 </div>
 
 <form>
-  <button type="submit" formaction="/moviereviews/{{moviereview.id}}/edit" style="background-color:#4CAF50; color:white; border-radius: 6px">Edit Movie Review</button>
+  <button type="submit" formaction="/moviereviews/{{moviereview.id}}/edit" style="background-color:#4CAF50; color:white; border-radius: 6px; padding-left: .8em; padding-right: .8em;">Edit Movie Review</button>
   <button type="submit" formaction="/moviereviews/{{moviereview.id}}/delete" style="background-color:#f44336; color:white; border-radius: 6px">Delete Movie Review</button>
 </form>
 <br><br>
   
 <form>
-  <button type="submit" formaction="{{ url_for('.list') }}" style="background-color:#4d0099; color:white; border-radius: 6px">Main Page</button>
+  <button type="submit" formaction="{{ url_for('main') }}" style="background-color:#4d0099; color:white; border-radius: 6px; padding-left: 2.6em; padding-right: 2.6em;">Main Page</button>
 </form>
 
 {% endblock %}
