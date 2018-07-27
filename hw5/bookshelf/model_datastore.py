@@ -26,12 +26,10 @@ def init_app(app):
 
 # [START model]
 class Book(ndb.Model):
-    movie = ndb.StringProperty()
-    year = ndb.IntegerProperty()
-    genre = ndb.StringProperty()
-    rating = ndb.IntegerProperty()
-    review = ndb.StringProperty()
-    reviewer = ndb.StringProperty()
+    author = ndb.StringProperty()
+    description = ndb.StringProperty(indexed=False)
+    publishedDate = ndb.StringProperty()
+    title = ndb.StringProperty()
 # [END model]
 
 
@@ -50,14 +48,12 @@ def from_datastore(entity):
         return None
     if isinstance(entity, builtin_list):
         entity = entity.pop()
-        book = {}
-        book['id'] = entity.key.id()
-        book['movie'] = entity.movie
-        book['year'] = entity.year
-        book['genre'] = entity.genre
-        book['rating'] = entity.rating
-        book['review'] = entity.review
-        book['reviewer'] = entity.reviewer
+    book = {}
+    book['id'] = entity.key.id()
+    book['author'] = entity.author
+    book['description'] = entity.description
+    book['publishedDate'] = entity.publishedDate
+    book['title'] = entity.title
     return book
 # [END from_datastore]
 
@@ -67,9 +63,9 @@ def from_datastore(entity):
 def list(limit=10, cursor=None):
     if cursor:
         cursor = Cursor(urlsafe=cursor)
-        query = Book.query().order(Book.movie)
-        entities, cursor, more = query.fetch_page(limit, start_cursor=cursor)
-        entities = builtin_list(map(from_datastore, entities))
+    query = Book.query().order(Book.title)
+    entities, cursor, more = query.fetch_page(limit, start_cursor=cursor)
+    entities = builtin_list(map(from_datastore, entities))
     return entities, cursor.urlsafe() if len(entities) == limit else None
 # [END list]
 
@@ -89,13 +85,11 @@ def update(data, id=None):
         book = key.get()
     else:
         book = Book()
-        book.movie = data['movie']
-        book.year = data['year']
-        book.genre = data['genre']
-        book.rating = data['rating']
-        book.review = data['review']
-        book.reviewer = data['reviewer']
-        book.put()
+    book.author = data['author']
+    book.description = data['description']
+    book.publishedDate = data['publishedDate']
+    book.title = data['title']
+    book.put()
     return from_datastore(book)
 
 create = update
@@ -107,4 +101,3 @@ def delete(id):
     key = ndb.Key('Book', int(id))
     key.delete()
 # [END delete]
-
