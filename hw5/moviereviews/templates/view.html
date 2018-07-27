@@ -22,9 +22,8 @@
 
 <div class="media">
   <div class="media-body">
-    <h4 class="movie-title">Movie: {{moviereview.movie}}
-      <small>Year: {{moviereview.year}}</small>
-    </h4>
+    <h4 class="movie-title">Movie: {{moviereview.movie}}</h4>
+    <h5 class="movie-year">Year: {{moviereview.year}}</h5>
     <h5 class="movie-genre">Genre: {{moviereview.genre}}</h5>
     <h5 class="movie-rating">Rating: {{moviereview.rating}}</h5>
     <p class="movie-review">Review: {{moviereview.review}}</p>
@@ -32,15 +31,9 @@
   </div>
 </div>
 
-<div class="btn-group">
-    <a href="/moviereviews/{{moviereview.id}}/edit" class="btn btn-primary btn-sm">
-      <i class="glyphicon glyphicon-edit"></i>
-      Edit Movie Review
-    </a>
-    <a href="/moviereviews/{{moviereview.id}}/delete" class="btn btn-danger btn-sm">
-      <i class="glyphicon glyphicon-trash"></i>
-      Delete Movie Review
-    </a>
-  </div>
+<form>
+  <button type="submit" formaction="/moviereviews/{{moviereview.id}}/edit" style="background-color:#4CAF50; color:white; border-radius: 6px">Edit Movie Review</button>
+  <button type="submit" formaction="/moviereviews/{{moviereview.id}}/delete" style="background-color:#f44336; color:white; border-radius: 6px">Delete Movie Review</button>
+</form>
 
 {% endblock %}
