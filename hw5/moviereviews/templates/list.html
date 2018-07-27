@@ -24,7 +24,7 @@
   Add moviereview
 </a>
 
-<table border="1">
+<table border="1" cellspacing ="10">
     <tr>
     <td> Movie </td>
     <td> Year </td>
@@ -34,17 +34,17 @@
     <td> Reviewer </td>
     </tr>
 
-{% for review in moviereviews %}
+{% for moviereview in moviereviews %}
 <div class="media">
-  <a href="/moviereviews/{{review.id}}">
+  <a href="/moviereviews/{{moviereview.id}}">
     <div class="media-body">
       <tr>
-          <td>{{review.movie}}</td>
-          <td>{{review.year}}</td>
-          <td>{{review.genre}}</td>
-          <td>{{review.rating}}</td>
-          <td>{{review.review}}</td>
-          <td>{{review.reviewer}}</td>
+          <td>{{moviereview.movie}}</td>
+          <td>{{moviereview.year}}</td>
+          <td>{{moviereview.genre}}</td>
+          <td>{{moviereview.rating}}</td>
+          <td>{{moviereview.review}}</td>
+          <td>{{moviereview.reviewer}}</td>
         </tr>
     </div>
   </a>
