@@ -74,6 +74,10 @@
 {% endfor %}
 </table>
 
+<form>
+  <button type="submit" formaction="/moviereviews/add" style="background-color:#008CBA; color:white; border-radius: 6px">Add Movie Review</button>
+</form>
+
 {% if next_page_token %}
 <nav>
   <ul class="pager">
@@ -83,10 +87,6 @@
 {% endif %}
 
 <br><br>
-
-<form>
-  <button type="submit" formaction="/moviereviews/add" style="background-color:#008CBA; color:white; border-radius: 6px">Add Movie Review</button>
-</form>
 
 
 {% endblock %}
