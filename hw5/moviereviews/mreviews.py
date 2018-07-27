@@ -46,7 +46,7 @@ def add():
 
         moviereview = get_model().create(data)
 
-        return redirect(url_for('.view', id=moviereview['id']))
+        return redirect(url_for('.list', id=moviereview['id']))
 
     return render_template("form.html", action="Add", moviereview={})
 # [END add]
@@ -61,7 +61,7 @@ def edit(id):
 
         moviereview = get_model().update(data, id)
 
-        return redirect(url_for('.view', id=moviereview['id']))
+        return redirect(url_for('.list', id=moviereview['id']))
 
     return render_template("form.html", action="Edit", moviereview=moviereview)
 
