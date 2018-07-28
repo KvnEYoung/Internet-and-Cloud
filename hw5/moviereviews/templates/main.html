@@ -1,11 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h2>Main Page for Movie Reviews</h2>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+<h2>Main Page for Movie Reviews</h2>
+<br>
+<br>
+<div class="media">
+    <img class="theater-image" align="middle" src="{{ url_for('static', filename='MovieTheater.jpg') }}">
+</div>
+<br>
+<br>
 
 <form>
   <button type="submit" formaction="{{ url_for('.list') }}" style="background-color:#4d0099; color:white; border-radius: 6px; padding-left: 1.5em; padding-right: 1.5em;">Movie Reviews</button>
