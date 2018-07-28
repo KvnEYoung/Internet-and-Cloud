@@ -3,4 +3,5 @@ a, h1, h2  { color: #00008F; }
 form       { margin:.1em auto; padding:.1em; width: 400px; border: 1px }
 .heading  { font-weight: bold; }
 .page      { margin:.1em auto; padding:.1em; width: 504px; }
+table {width: 600px; }
 img {width: auto !important; text-align: center;}
