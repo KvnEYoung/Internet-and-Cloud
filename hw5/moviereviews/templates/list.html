@@ -17,12 +17,12 @@
 {% for moviereview in moviereviews %}
 
 <tr>
-  <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.movie}}</a></td>
-  <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.year}}</a></td>
-  <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.genre}}</a></td>
-  <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.rating}}</a></td>
-  <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.review}}</a></td>
-  <td><a href="/moviereviews/{{moviereview.id}}"> {{moviereview.reviewer}}</a></td>
+  <td><a style="text-decoration: none;" href="/moviereviews/{{moviereview.id}}"> {{moviereview.movie}}</a></td>
+  <td><a style="text-decoration: none;" href="/moviereviews/{{moviereview.id}}"> {{moviereview.year}}</a></td>
+  <td><a style="text-decoration: none;" href="/moviereviews/{{moviereview.id}}"> {{moviereview.genre}}</a></td>
+  <td><a style="text-decoration: none;" href="/moviereviews/{{moviereview.id}}"> {{moviereview.rating}}</a></td>
+  <td><a style="text-decoration: none;" href="/moviereviews/{{moviereview.id}}"> {{moviereview.review}}</a></td>
+  <td><a style="text-decoration: none;" href="/moviereviews/{{moviereview.id}}"> {{moviereview.reviewer}}</a></td>
 </tr>
 
 {% else %}
