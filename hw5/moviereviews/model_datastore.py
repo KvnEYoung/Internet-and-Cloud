@@ -75,7 +75,7 @@ def update(data, id=None):
 create = update
 
 def delete(id):
-     """ Takes a moviereview key and deletes the corresponding entity (movie id, title, year, genre, rating, 
+    """ Takes a moviereview key and deletes the corresponding entity (movie id, title, year, genre, rating, 
     review and reviewer) from the DataStore. """
     key = ndb.Key('MovieReview', int(id))
     key.delete()
