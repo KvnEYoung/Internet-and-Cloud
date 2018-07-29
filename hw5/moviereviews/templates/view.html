@@ -4,7 +4,7 @@
 
 <h2 style="text-align: center;">Movie Review</h2>
 
-<div class="review" style="border:1px solid black; margin-left: auto; margin-right: auto; width: 504px;">
+<div class="review">
   <div class="review-body">
     <p class="heading" style="border:1px solid blue; background-color: white;">Movie: {{moviereview.movie}}</p>
     <p class="heading" style="border:1px solid blue; background-color: white;">Year: {{moviereview.year}}</p>
@@ -19,7 +19,8 @@
   <button type="submit" formaction="/moviereviews/{{moviereview.id}}/edit" style="background-color:#4CAF50; color:white; border-radius: 6px; padding-left: .8em; padding-right: .8em;">Edit Movie Review</button>
   <button type="submit" formaction="/moviereviews/{{moviereview.id}}/delete" style="background-color:#f44336; color:white; border-radius: 6px">Delete Movie Review</button>
 </form>
-<br><br>
+<br>
+<br>
   
 <form>
   <button type="submit" formaction="{{ url_for('.list') }}" style="background-color:#4d0099; color:white; border-radius: 6px; padding-left: 1.5em; padding-right: 1.5em;">Movie Reviews</button>

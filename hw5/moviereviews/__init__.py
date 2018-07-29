@@ -59,6 +59,7 @@ def create_app(config, debug=False, testing=False, config_overrides=None):
 
 
 def get_model():
+    """ Gets the correct Model for the application. """
     model_backend = current_app.config['DATA_BACKEND']
     if model_backend == 'datastore':
         from . import model_datastore
