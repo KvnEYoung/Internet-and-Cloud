@@ -44,8 +44,7 @@ def list(limit=10, cursor=None):
     query = MovieReview.query().order(MovieReview.movie)
     entities, cursor, more = query.fetch_page(limit, start_cursor=cursor)
     entities = builtin_list(map(from_datastore, entities))
-    templimit = limit + 1
-    return entities, cursor.urlsafe() if len(entities) >= templimit else None
+    return entities, cursor.urlsafe() if len(entities) == limit else None
 
 def read(id):
     """ Takes a moviereview key and returns the corresponding entity (movie id, title, year, genre, rating, 
