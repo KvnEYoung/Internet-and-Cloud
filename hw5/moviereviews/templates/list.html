@@ -38,11 +38,13 @@
 </table>
 
 {% if next_page_token %}
-<nav>
-  <ul class="pager" width: 504px;>
-    <li><a href="?page_token={{next_page_token}}">More</a></li>
-  </ul>
-</nav>
+<form>
+  <nav>
+    <ul class="pager">
+      <li><a href="?page_token={{next_page_token}}">More</a></li>
+    </ul>
+  </nav>
+</form>
 {% endif %}
 
 <br><br>
