@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+
+{% block content %}
+<center>
+  <h1>Welcome to Ripe Tomatoes</h1>
+  <h3>A fresher movie review site</h3>
+  <a href="{{ url_for('pages.reviews') }}">Go to the reviews!</a>
+</center>
+{% endblock %}

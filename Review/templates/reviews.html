@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %} Reviews {% endblock %}
+{% block content %}
+<center style="font-size: 4em; font-variant: small-caps;">Movie Reviews!</center>
+<center><a class="review_btn" href="{{ url_for('pages.submit') }}">Submit a New Review</a></center>
+{% for movie in movies %}
+<div class="card">
+  <h1>{{ movie }}</h1>
+  Directed By: {{ movies[movie]['director']}}<br>
+  Released: {{ movies[movie]['release_year'] }}<br>
+  Rating: {{ movies[movie]['mov_rating'] }}<br>
+  Runtime: {{ movies[movie]['runtime'] }} min<br>
+  Genre: {{ ', '.join(movies[movie]['genre']) }} <br><br>
+  {% for review in reviews[movie] %}
+  <div class="ele">
+      {{ review['review'] }}<br><br>
+    Rating: {{ review['rev_rating'] }}/5<br>
+    Author: {{ review['rev_name'] }}<br>
+  </div>
+  {% endfor %}
+</div>
+{% endfor %}
+{% endblock %}

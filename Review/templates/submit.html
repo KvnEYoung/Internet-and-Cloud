@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %} Submit New Review {% endblock %}
+{% block content %}
+<table class="card">
+  <form method='post'>
+    <tr>
+      <td><label for="mov_name">Name of Movie: </label></td>
+      <td><input class="entry_field" type="text" name="mov_name" required></td>
+    </tr>
+    <tr>
+    <td><label for="release_year">Released (year): </label></td>
+    <td><input class="entry_field" type="number" name="release_year" min="1895" max="2018" required></td>
+  </tr>
+  <tr>
+    <td><label for="director">Director: </label></td>
+    <td><input class="entry_field" type="text" name="director" required></td>
+  </tr>
+  <tr>
+    <td><label for="mov_rating">Movie Rated: </label></td>
+    <td>
+      <input type="radio" name="mov_rating" value="G">G
+      <input type="radio" name="mov_rating" value="PG">PG
+      <input type="radio" name="mov_rating" value="PG-13" checked>PG-13
+      <input type="radio" name="mov_rating" value="R">R
+      <input type="radio" name="mov_rating" value="NC-17">NC-17
+      <input type="radio" name="mov_rating" value="Not Rated">Not Rated
+    </td>
+  </tr>
+  <tr>
+    <td><label for="runtime">Runtime (minutes): </label></td>
+    <td><input class="entry_field" type="number" name="runtime" required><td>
+    </tr>
+    <tr>
+      <td><label for="genre"> Genres: </label></td>
+      <td>{% for g in genres %}
+        <input type="checkbox" name="{{ g }}"> {{ g }}
+        {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4"><textarea name="review" rows="20" cols="40" placeholder="Write your review  here" required></textarea></td>
+    </tr>
+    <tr>
+      <td><label for="rev_rating">Rating: </label></td>
+      <td>
+        <input type="radio" name="rev_rating" value=1>1
+        <input type="radio" name="rev_rating" value=2>2
+        <input type="radio" name="rev_rating" value=3>3
+        <input type="radio" name="rev_rating" value=4>4
+        <input type="radio" name="rev_rating" value=5 checked>5
+      </td>
+    </tr>
+    <tr>
+      <td><label for="rev_name">Reviewed by: </label></td>
+      <td><input class="entry_field" type="text" name="rev_name" required></td>
+    </tr>
+    <tr><td>
+      <button class="button" type="submit">Submit</button></td>
+    </form>
+
+  <tr><td><a class="small_link" href={{ url_for('pages.reviews') }}>Go back</a></td></tr>
+</table>
+  {% endblock %}
