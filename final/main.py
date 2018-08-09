@@ -12,7 +12,7 @@ from submit import submit
 
 app = Flask(__name__)
 
-app.add_url_rule('/', view_func=index.as_view('index'), methods=['GET'])
+app.add_url_rule('/', view_func=index.as_view('index'), methods=['GET', 'POST'])
 app.add_url_rule('/reviews', view_func=reviews.as_view('reviews'), methods=['GET'])
 app.add_url_rule('/submit', view_func=submit.as_view('submit'), methods=['GET', 'POST'])
 

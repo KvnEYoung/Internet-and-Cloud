@@ -5,6 +5,17 @@
 <center>
   <h1>Welcome to Ripe Tomatoes</h1>
   <h3>A fresher movie review site</h3>
+  <br><br><br>
+  <h4>Please select the review language</h4>
+  <form method="POST" action="">
+    <select name="review_lang">
+      <option value="en">English</option>
+      <option value="es">Spanish</option>
+      <option value="fr">French</option>
+    </select>
+    <button type="submit">Submit</button>
+  </form>
+  <h4>Current language is: </h4>
   <a href="{{ url_for('reviews') }}">Go to the reviews!</a>
 </center>
 {% endblock %}

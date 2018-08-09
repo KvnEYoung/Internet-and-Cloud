@@ -32,6 +32,8 @@ class model(Model):
         )')
         mcursor.close()
         rcursor.close()
+        
+        language = 'en'
 
 
     def select(self):
@@ -87,3 +89,6 @@ class model(Model):
             VALUES (?, ?, ?, ?)', (mov_name, review, rev_name, rev_rating,))
         conn.commit()
         cursor.close()
+        
+	def setLanguage(self, review_lang):
+		language = review_lang
