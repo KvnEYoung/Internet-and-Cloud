@@ -91,7 +91,7 @@ class model(Model):
         cursor.close()
         
     def setLanguage(self, review_lang):
-        self.language = review_lang
+        current_app.config['LANGUAGE'] = review_lang
 
     def getLanguage(self):
-        return self.language
+        return current_app.config['LANUAGE']

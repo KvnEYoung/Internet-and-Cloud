@@ -55,7 +55,7 @@ def select():
     'genre': m['genre'].split(',') }
     for m in movies_query }
 
-  review_query = Reviews.query.order_by(Reviews.mov_name).all()
+  reviews_query = Reviews.query.order_by(Reviews.mov_name).all()
   reviews = { r['mov_name']: [] for r in reviews_query }
   for row in reviews_query:
     reviews[row['mov_name']].append({
