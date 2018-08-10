@@ -77,22 +77,45 @@ textarea {
   font-size: 16px;
 }
 .but1 {
-  background-color: ForestGreen;
-  border: none;
+  background-color: #4d0099;
   color: white;
-  padding: 10px 20px;
+  border-radius: 6px;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
   text-align: center;
   display: inline-block;
-  font-size: 16px;
 }
 .but2 {
-  background-color: Indigo;
-  border: none;
+  background-color: #008CBA;
   color: white;
-  padding: 10px 20px;
+  border-radius: 6px;
   text-align: center;
   display: inline-block;
-  font-size: 16px;
+}
+.but3 {
+  background-color: #4d0099;
+  color: white;
+  border-radius: 6px;
+  padding-left: 2.6em;
+  padding-right: 2.6em;
+  text-align: center;
+  display: inline-block;
+}
+.but4 {
+  background-color: #008CBA;
+  color: white;
+  border-radius: 6px;
+  text-align: center;
+  display: inline-block;
+}
+.but5 {
+  background-color: #008CBA;
+  color: white;
+  border-radius: 6px;
+  padding-left: 1.6em;
+  padding-right: 1.6em;
+  text-align: center;
+  display: inline-block;
 }
 
 .button:hover {
