@@ -39,7 +39,7 @@ class Reviews(db.Model):
     '''
     __tablename = 'reviews'
     mov_name = db.Column(db.String(255), primary_key=True)
-    review = db.TextProperty(db.Text())
+    review = db.Column(db.Text())
     rev_name = db.Column(db.String(255))
     rev_rating = db.Column(db.Integer())
 
@@ -58,8 +58,7 @@ def select(self):
                             'genre': m['genre'].split(',') }
                             for m in movies_query }
 
-
-	reviews_query = Reviews.query(order_by(Reviews.mov_name).all())
+    reviews_query = Reviews.query(order_by(Reviews.mov_name)).all()
     reviews = { r['mov_name']: [] for r in reviews_query }
     for row in reviews_query:
         reviews[row['mov_name']].append({
