@@ -33,22 +33,23 @@ def select():
   ds = get_client()
   movies_query = ds.query(kind='Movie', order=['mov_name']).fetch()
   movies = {m['mov_name']: {
-      'release_year': m['release_year'], 
+      'release_year': m['release_year'],
       'director': m['director'],
       'mov_rating': m['mov_rating'],
       'runtime': m['runtime'],
       'genre': m['genre'].split(',')}
       for m in movies_query}
-  reviews_query = ds.query(kind='Review').fetch()
-  reviews = { r['mov_name']: [] for r in reviews_query }
-  # this is ugly find a way to do it in one
   review_query = ds.query(kind='Review').fetch()
+  reviews = dict()
   for row in review_query:
+    if row['mov_name'] not in reviews:
+      reviews[row['mov_name']] = []
+
     reviews[row['mov_name']].append({
       'review':row['review'],
       'rev_name':row['rev_name'],
       'rev_rating':row['rev_rating'] })
-    return [movies, reviews]
+  return [movies, reviews]
 
 def insert(mov_name, release_year, director, mov_rating,
 		runtime, genre, review, rev_name, rev_rating):
@@ -68,7 +69,7 @@ def insert(mov_name, release_year, director, mov_rating,
         'director': director,
         'mov_rating': mov_rating,
         'runtime': runtime,
-        'genre': genre 
+        'genre': genre
       })
       ds.put(movie)
     with ds.transaction():
