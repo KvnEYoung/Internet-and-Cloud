@@ -5,12 +5,6 @@ from .Model import Model
 
 db = SQLAlchemy()
 
-
-def __init__(self):
-    app.config.setdefault('SQLALCHEMY_TRACK_MODIFICATIONS', False)
-    db.init_app(app)
-    self.language = "en"
-
 class Movies(db.Model):
     '''
     Model to hold static details for a given movie
@@ -43,14 +37,21 @@ class Reviews(db.Model):
     rev_name = db.Column(db.String(255))
     rev_rating = db.Column(db.Integer())
 
-def select(self):
-    """
-    Retrieves information from movies and reviews databases. Inserts both into
-    dictionaries using the movie's name as the keyself.
-    :return List of dictionaries. Movies database in index 0, review database in index 1self.
-    """
-    movies_query = Movies.query(order_by(Movies.mov_name)).all()
-    movies = { m['mov_name']: {
+class model(Model):
+
+    def __init__(self):
+        app.config.setdefault('SQLALCHEMY_TRACK_MODIFICATIONS', False)
+        db.init_app(app)
+        self.language = "en"
+
+    def select(self):
+        """
+        Retrieves information from movies and reviews databases. Inserts both into
+        dictionaries using the movie's name as the keyself.
+        :return List of dictionaries. Movies database in index 0, review database in index 1self.
+        """
+        movies_query = Movies.query(order_by(Movies.mov_name)).all()
+        movies = { m['mov_name']: {
                             'release_year': m['release_year'],
                             'director': m['director'],
                             'mov_rating': m['mov_rating'],
@@ -58,34 +59,34 @@ def select(self):
                             'genre': m['genre'].split(',') }
                             for m in movies_query }
 
-    reviews_query = Reviews.query(order_by(Reviews.mov_name)).all()
-    reviews = { r['mov_name']: [] for r in reviews_query }
-    for row in reviews_query:
-        reviews[row['mov_name']].append({
+        reviews_query = Reviews.query(order_by(Reviews.mov_name)).all()
+        reviews = { r['mov_name']: [] for r in reviews_query }
+        for row in reviews_query:
+            reviews[row['mov_name']].append({
                                 'review':row['review'],
                                 'rev_name':row['rev_name'],
                                 'rev_rating':row['rev_rating'] })
-    return [movies, reviews]
+        return [movies, reviews]
 
-def insert(self, mov_name, release_year, director, mov_rating,
+    def insert(self, mov_name, release_year, director, mov_rating,
 			runtime, genre, review, rev_name, rev_rating):
-    """
-    Inserts a new review into databases. If it is the first revew for a movies
-    then a new entry is created in movies databse. Otherwise only review information
-    is inserted.
-    """
-    if Movies.query().filter_by(mov_name=mov_name).first() is None:
-        data = Movies(mov_name, release_year, director, mov_rating,
-        runtime, ','.join(genre))
+        """
+        Inserts a new review into databases. If it is the first revew for a movies
+        then a new entry is created in movies databse. Otherwise only review information
+        is inserted.
+        """
+        if Movies.query().filter_by(mov_name=mov_name).first() is None:
+            data = Movies(mov_name, release_year, director, mov_rating,
+            runtime, ','.join(genre))
+            db.session.add(data)
+            db.session.commit()
+
+        data = Reviews(mov_name, review, rev_name, rev_rating)
         db.session.add(data)
         db.session.commit()
 
-    data = Reviews(mov_name, review, rev_name, rev_rating)
-    db.session.add(data)
-    db.session.commit()
+    def setLanguage(self, review_lang):
+        self.language = review_lang
 
-def setLanguage(self, review_lang):
-    self.language = review_lang
-
-def getLanguage(self):
-    return self.language
+    def getLanguage(self):
+        return self.language
