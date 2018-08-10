@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2018 Jeff Lund
+# Copyright (c) 2018 Jeff Lund, Kevin Young
 '''
 Movie review flask app
 '''
