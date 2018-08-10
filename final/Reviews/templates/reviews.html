@@ -2,7 +2,7 @@
 {% block title %} Reviews {% endblock %}
 {% block content %}
 <center style="font-size: 4em; font-variant: small-caps;">Movie Reviews!</center>
-<center><a class="review_btn" href="{{ url_for('submit') }}">Submit a New Review</a></center>
+<center><a class="review_btn" href="{{ url_for('views.submit') }}">Submit a New Review</a></center>
 {% for movie in movies %}
 <div class="card">
   <h1>{{ movie }}</h1>
@@ -21,5 +21,7 @@
 </div>
 {% endfor %}
 <br>
-<center><a href="{{ url_for('index') }}">Main Page</a></center>
+<h4>Current language is: {{language}}</h4>
+<br>
+<center><a href="{{ url_for('views.index') }}">Main Page</a></center>
 {% endblock %}

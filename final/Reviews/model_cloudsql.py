@@ -1,15 +1,12 @@
 #cloud_sql model
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask
-from .Model import Model
+from flask import Flask, current_app
 
 db = SQLAlchemy()
 
-
-def __init__(self):
+def init_app(app):
     app.config.setdefault('SQLALCHEMY_TRACK_MODIFICATIONS', False)
     db.init_app(app)
-    self.language = "en"
 
 class Movies(db.Model):
     '''
@@ -39,17 +36,17 @@ class Reviews(db.Model):
     '''
     __tablename = 'reviews'
     mov_name = db.Column(db.String(255), primary_key=True)
-    review = db.TextProperty(db.Text())
+    review = db.Column(db.Text())
     rev_name = db.Column(db.String(255))
     rev_rating = db.Column(db.Integer())
 
-def select(self):
+def select():
     """
     Retrieves information from movies and reviews databases. Inserts both into
     dictionaries using the movie's name as the keyself.
     :return List of dictionaries. Movies database in index 0, review database in index 1self.
     """
-    mov_query = Movies.query(order_by(Movies.mov_name)).all()
+    mov_query = Movies.query().all()
     movies = { m['mov_name']: {
                             'release_year': m['release_year'],
                             'director': m['director'],
@@ -58,8 +55,7 @@ def select(self):
                             'genre': m['genre'].split(',') }
                             for m in mov_query }
 
-
-    review_query = Reviews.query(order_by(Reviews.mov_name).all()
+    review_query = Reviews.query().all()
     reviews = { r['mov_name']: [] for r in reviews_query }
     for row in reviews_query:
         reviews[row['mov_name']].append({
@@ -68,7 +64,7 @@ def select(self):
                                 'rev_rating':row['rev_rating'] })
     return [movies, reviews]
 
-def insert(self, mov_name, release_year, director, mov_rating,
+def insert(mov_name, release_year, director, mov_rating,
 			runtime, genre, review, rev_name, rev_rating):
     """
     Inserts a new review into databases. If it is the first revew for a movies
@@ -85,8 +81,8 @@ def insert(self, mov_name, release_year, director, mov_rating,
     db.session.add(data)
     db.session.commit()
 
-def setLanguage(self, review_lang):
-    self.language = review_lang
+def setLanguage(review_lang):
+    current_app.config['LANGUAGE'] = review_lang
 
-def getLanguage(self):
-    return self.language
+def getLanguage():
+    return current_app.config['LANUAGE']

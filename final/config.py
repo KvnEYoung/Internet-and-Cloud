@@ -1,5 +1,6 @@
+LANGUAGE = 'en'
 PROJECT_ID = 'lund-young-510'
-
+DATA_BACKEND='cloudsql'
 CLOUDSQL_USER='root'
 CLOUDSQL_PASSWORD = 'cs510'
 CLOUDSQL_DATABASE = 'movie-reviews'
