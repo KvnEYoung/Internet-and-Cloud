@@ -17,7 +17,7 @@ def index():
     """Renders landing page for movie review site. """
     if request.method == 'GET':
         language = model.getLanguage()
-	return render_template('index.html', language=language)
+        return render_template('index.html', language=language)
 		
     else:
         """ POST request to process form data to change the language of reviews. """
