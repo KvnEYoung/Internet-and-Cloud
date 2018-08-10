@@ -8,6 +8,6 @@ Runs app factory to create Movie Review app
 '''
 app = Reviews.create_app(config)
 
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)
+ 

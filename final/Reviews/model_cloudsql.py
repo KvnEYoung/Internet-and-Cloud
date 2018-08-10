@@ -40,42 +40,46 @@ class Reviews(db.Model):
     rev_name = db.Column(db.String(255))
     rev_rating = db.Column(db.Integer())
 
-def select():
-    """
-    Retrieves information from movies and reviews databases. Inserts both into
-    dictionaries using the movie's name as the keyself.
-    :return List of dictionaries. Movies database in index 0, review database in index 1self.
-    """
-    mov_query = Movies.query().all()
-    movies = { m['mov_name']: {
-                            'release_year': m['release_year'],
-                            'director': m['director'],
-                            'mov_rating': m['mov_rating'],
-                            'runtime': m['runtime'],
-                            'genre': m['genre'].split(',') }
-                            for m in mov_query }
+def select(self):
+  """
+  Retrieves information from movies and reviews databases. Inserts both into
+  dictionaries using the movie's name as the keyself.
+  :return List of dictionaries. Movies database in index 0, review database in index 1self.
+  """
+  movies_query = Movies.query().all()
+  movies = { m['mov_name']: {
+    'release_year': m['release_year'],
+    'director': m['director'],
+    'mov_rating': m['mov_rating'],
+    'runtime': m['runtime'],
+    'genre': m['genre'].split(',') }
+    for m in movies_query }
 
     review_query = Reviews.query().all()
     reviews = { r['mov_name']: [] for r in reviews_query }
     for row in reviews_query:
         reviews[row['mov_name']].append({
+        reviews_query = Reviews.query()).all()
+        reviews = { r['mov_name']: [] for r in reviews_query }
+        for row in reviews_query:
+            reviews[row['mov_name']].append({
                                 'review':row['review'],
                                 'rev_name':row['rev_name'],
                                 'rev_rating':row['rev_rating'] })
-    return [movies, reviews]
+        return [movies, reviews]
 
 def insert(mov_name, release_year, director, mov_rating,
 			runtime, genre, review, rev_name, rev_rating):
-    """
-    Inserts a new review into databases. If it is the first revew for a movies
-    then a new entry is created in movies databse. Otherwise only review information
-    is inserted.
-    """
-    if Movies.query().filter_by(mov_name=mov_name).first() is None:
-        data = Movies(mov_name, release_year, director, mov_rating,
-        runtime, ','.join(genre))
-        db.session.add(data)
-        db.session.commit()
+  """
+  Inserts a new review into databases. If it is the first revew for a movies
+  then a new entry is created in movies databse. Otherwise only review information
+  is inserted.
+  """
+  if Movies.query().filter_by(mov_name=mov_name).first() is None:
+    data = Movies(mov_name, release_year, director, mov_rating,
+    runtime, ','.join(genre))
+    db.session.add(data)
+    db.session.commit()
 
     data = Reviews(mov_name, review, rev_name, rev_rating)
     db.session.add(data)
