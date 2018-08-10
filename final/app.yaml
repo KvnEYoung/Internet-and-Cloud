@@ -3,9 +3,7 @@ env: flex
 runtime_config:
         python_version: 3
 entrypoint: gunicorn -b :$PORT main:app
-env_variables:
-        mysql+pymysql://USER:PASSWORD@/DATABASE?unix_socket=/cloudsql/INSTANCE_CONNECTION_NAME
 beta_settings:
-        cloud_sql_instances: INSTANCE_CONNECTION_NAME
-    SQLALCHEMY_DATABASE_URI: >-
-            mysql+pymysql://root:cs510@/movie-reviews?unix_socket=/cloudsql/lund-young-510:us-west1:movie-reviews            
+        cloud_sql_instances: lund-young-510:uswest1:movie-reviews
+        #SQLALCHEMY_DATABASE_URI: >-
+        #    mysql+pymysql://root:cs510@/movie-reviews?unix_socket=/cloudsql/lund-young-510:us-west1:movie-reviews            
