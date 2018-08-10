@@ -81,8 +81,5 @@ def insert(mov_name, release_year, director, mov_rating,
   db.session.add(data)
   db.session.commit()
 
-def setLanguage(review_lang):
-  current_app.config['LANGUAGE'] = review_lang
-
 def getLanguage():
   return current_app.config['LANUAGE']

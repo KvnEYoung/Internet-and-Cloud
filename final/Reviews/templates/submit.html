@@ -55,9 +55,15 @@
       <td><input class="entry_field" type="text" name="rev_name" required></td>
     </tr>
     <tr><td>
-      <button class="button" type="submit">Submit</button></td>
+      <button type="submit" style="background-color:#008CBA; color:white; border-radius: 6px; padding-left: 1.6em; padding-right: 1.6em;">Submit Review</button></td></tr>
     </form>
+    
+    </table>
+    <br>
+    <center>
+    	<form>
+    		<button type="submit" formaction="{{ url_for('views.index') }}" style="background-color:#4d0099; color:white; border-radius: 6px; padding-left: 2.6em; padding-right: 2.6em;">Main Page</button>
+    	</form>
+    </center>
 
-  <tr><td><a class="small_link" href={{ url_for('views.reviews') }}>Go back</a></td></tr>
-</table>
   {% endblock %}

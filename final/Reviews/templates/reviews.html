@@ -2,7 +2,12 @@
 {% block title %} Reviews {% endblock %}
 {% block content %}
 <center style="font-size: 4em; font-variant: small-caps;">Movie Reviews!</center>
-<center><a class="review_btn" href="{{ url_for('views.submit') }}">Submit a New Review</a></center>
+<center>
+  <form>
+  	<button type="submit" formaction="{{ url_for(views.index') }}" style="background-color:#4d0099; color:white; border-radius: 6px; padding-left: 2.6em; padding-right: 2.6em;">Main Page</button>
+  	<button type="submit" formaction="{{ url_for('views.submit') }}" style="background-color:#008CBA; color:white; border-radius: 6px">Add Movie Review</button>
+  </form>
+</center
 {% for movie in movies %}
 <div class="card">
   <h1>{{ movie }}</h1>
@@ -21,7 +26,6 @@
 </div>
 {% endfor %}
 <br>
-<h4>Current language is: {{ language }}</h4>
+<center><h4>Current language is: {{language}}</h4></center>
 <br>
-<center><a href="{{ url_for('views.index') }}">Main Page</a></center>
 {% endblock %}

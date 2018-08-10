@@ -6,6 +6,8 @@ Movie review flask app
 
 from flask import Flask, redirect, request, url_for, render_template, current_app, Blueprint
 from Reviews import get_model
+from google.cloud import translate
+import six
 
 views = Blueprint('views', __name__)
 
@@ -41,7 +43,7 @@ def submit():
   Renders submission form to submit a new movie review.
   """
   # Defines available genres for the a movie. Makes list available in GET and POST.
-  genres = ['Action', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', \
+  genres = [translate_text('Action'), 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', \
     'Documentary', 'Drama', 'Family', 'Fantasy', 'Film Noir', 'History', 'Horror', \
     'Indie','Music', 'Musical', 'Mystery', 'Romance', 'Sci-Fi', 'Short', 'Sport', \
     'Superhero', 'Thiller', 'War', 'Western']
@@ -55,5 +57,15 @@ def submit():
       request.form['rev_name'], request.form['rev_rating'])
 
     return redirect(url_for('views.reviews'))
-
+	
   return render_template('submit.html', genres=genres)
+  
+def translate_text(text):
+  translate_client = translate.Client()
+  language = current_app.config['LANGUAGE']
+  
+  if isinstance(text, six.binary_type):
+    text = text.decode('utf-8')
+  
+  result = translate_client.translate(text, target_language=language)	
+  return print(u.result['translatedText'])
