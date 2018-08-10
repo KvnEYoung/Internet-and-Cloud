@@ -14,35 +14,37 @@ model = mm.get_model()
 @app.route('/')
 @app.route('/index.html', methods=['GET', 'POST'])
 def index():
-	""" Renders landing page for movie review site. """
-	if request.method == 'GET':
-        return render_template('index.html', language=model.getLanguage())
-        
-     else:
-     	""" POST request to process form data to change the language of reviews. """
-        language = request.form['review_lang']
-        model.setLanguage(language)
-        return render_template('index.html', language=model.getLanguage())
+    """Renders landing page for movie review site. """
+    if request.method == 'GET':
+        language = model.getLanguage()
+        return render_template('index.html', language=language)
+		
+    else:
+        """ POST request to process form data to change the language of reviews. """
+        model.setLanguage(request.form['review_lang'])
+        language = model.getLanguage()
+        return render_template('index.html', language=language)
+
         
 @app.route('/reviews')
 def reviews():
-        """ Renders all reviews from the model. """
-        #databases must be unpacked before use in render template.
-        dbs = model.select()
-        return render_template('reviews.html', movies=dbs[0], reviews=dbs[1])
+    """ Renders all reviews from the model. """
+    #databases must be unpacked before use in render template.
+    dbs = model.select()
+    return render_template('reviews.html', movies=dbs[0], reviews=dbs[1])
 
 @app.route('/submit', methods=['GET', 'POST'])
 def submit():
-	""" Defines available genres for the a movie. Makes list available in GET and POST. """
+    """ Defines available genres for the a movie. Makes list available in GET and POST. """
 	
-	genres = ['Action', 'Adventure', 'Animation', 'Biography', 'Comedy',
+    genres = ['Action', 'Adventure', 'Animation', 'Biography', 'Comedy',
         'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'Film Noir',
         'History', 'Horror', 'Indie','Music', 'Musical', 'Mystery', 'Romance',
-         'Sci-Fi', 'Short', 'Sport', 'Superhero', 'Thiller', 'War', 'Western']
+        'Sci-Fi', 'Short', 'Sport', 'Superhero', 'Thiller', 'War', 'Western']
          
-	if request.method =['GET']:
+    if request.method == 'GET':
         """ Renders submission form to submit a new movie review. """
-        return render_template('submit.html', genres = genres)
+        return render_template('submit.html', genres=genres)
 
     else:
         """ POST request to process form data to insert new review into model.
