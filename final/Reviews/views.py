@@ -6,8 +6,6 @@ Movie review flask app
 
 from flask import Flask, redirect, request, url_for, render_template, current_app, Blueprint
 from Reviews import get_model
-from google.cloud import translate
-import six
 
 views = Blueprint('views', __name__)
 
@@ -35,7 +33,7 @@ def reviews():
   dbs = model.select()
   if dbs is None:
       dbs = [[],[]]
-  return render_template('reviews.html', movies=dbs[0], reviews=dbs[1], language='en')
+  return render_template('reviews.html', movies=dbs[0], reviews=dbs[1], language=current_app.config['LANGUAGE'])
 
 @views.route('/submit', methods=['GET', 'POST'])
 def submit():
@@ -43,13 +41,13 @@ def submit():
   Renders submission form to submit a new movie review.
   """
   # Defines available genres for the a movie. Makes list available in GET and POST.
-  genres = [translate_text('Action'), 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', \
+  model = get_model()
+  genres = [model.translate_text('Action'), 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', \
     'Documentary', 'Drama', 'Family', 'Fantasy', 'Film Noir', 'History', 'Horror', \
     'Indie','Music', 'Musical', 'Mystery', 'Romance', 'Sci-Fi', 'Short', 'Sport', \
     'Superhero', 'Thiller', 'War', 'Western']
 
   if request.method == 'POST':
-    model = get_model()
     genre_selected = [gen for gen in genres if gen in request.form]
     model.insert(request.form['mov_name'], request.form['release_year'], \
       request.form['director'], request.form['mov_rating'], \
@@ -60,12 +58,3 @@ def submit():
 	
   return render_template('submit.html', genres=genres)
   
-def translate_text(text):
-  translate_client = translate.Client()
-  language = current_app.config['LANGUAGE']
-  
-  if isinstance(text, six.binary_type):
-    text = text.decode('utf-8')
-  
-  result = translate_client.translate(text, target_language=language)	
-  return print(u.result['translatedText'])

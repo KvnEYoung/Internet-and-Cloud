@@ -1,6 +1,8 @@
 # Cloud Datastore model
 from flask import current_app
 from google.cloud import datastore
+from google.cloud import translate
+import six
 
 builin_list = list
 #  Model to hold static details for a given movie
@@ -46,7 +48,7 @@ def select():
       reviews[row['mov_name']] = []
 
     reviews[row['mov_name']].append({
-      'review':row['review'],
+      'review':translate_text(row['review']),
       'rev_name':row['rev_name'],
       'rev_rating':row['rev_rating'] })
   return [movies, reviews]
@@ -85,4 +87,14 @@ def insert(mov_name, release_year, director, mov_rating,
 
 
 def getLanguage():
-  return current_app.config['LANUAGE']
+  return current_app.config['LANGUAGE']
+  
+def translate_text(text):
+  translate_client = translate.Client()
+  language = getLanguage()
+  
+  if isinstance(text, six.binary_type):
+    text = text.decode('utf-8')
+  
+  result = translate_client.translate(text, target_language=language)	
+  return result['translatedText']
