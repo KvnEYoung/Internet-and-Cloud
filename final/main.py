@@ -31,7 +31,8 @@ def reviews():
     """ Renders all reviews from the model. """
     #databases must be unpacked before use in render template.
     dbs = model.select()
-    return render_template('reviews.html', movies=dbs[0], reviews=dbs[1])
+    language = model.getLanguage()
+    return render_template('reviews.html', movies=dbs[0], reviews=dbs[1], language=language)
 
 @app.route('/submit', methods=['GET', 'POST'])
 def submit():
@@ -58,3 +59,4 @@ def submit():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)
+ 
