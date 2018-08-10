@@ -18,7 +18,7 @@ class Movies(db.Model):
   :param genre: Genre categories for a movie. Multiple genres are allowed. Stored in a single string
   with each value seperated by a comma
   '''
-  __tablename__ = 'movies'
+  __tablename__ = 'Movies'
   mov_name = db.Column(db.String(255), primary_key=True)
   release_year = db.Column(db.Integer())
   director = db.Column(db.String(255))
@@ -34,7 +34,7 @@ class Reviews(db.Model):
   :param rev_name: Reviewers Name
   :param rev_rating: Reviewers rating, 1-5
   '''
-  __tablename = 'reviews'
+  __tablename = 'Reviews'
   mov_name = db.Column(db.String(255), primary_key=True)
   review = db.Column(db.Text())
   rev_name = db.Column(db.String(255))
@@ -46,7 +46,7 @@ def select():
   dictionaries using the movie's name as the keyself.
   :return List of dictionaries. Movies database in index 0, review database in index 1self.
   """
-  movies_query = Movies.query().all()
+  movies_query = Movies.query.order_by(Movies.mov_name).all()
   movies = { m['mov_name']: {
     'release_year': m['release_year'],
     'director': m['director'],
@@ -55,7 +55,7 @@ def select():
     'genre': m['genre'].split(',') }
     for m in movies_query }
 
-  review_query = Reviews.query().all()
+  review_query = Reviews.query.order_by(Reviews.mov_name).all()
   reviews = { r['mov_name']: [] for r in reviews_query }
   for row in reviews_query:
     reviews[row['mov_name']].append({
@@ -71,7 +71,7 @@ def insert(mov_name, release_year, director, mov_rating,
   then a new entry is created in movies databse. Otherwise only review information
   is inserted.
   """
-  if Movies.query().filter_by(mov_name=mov_name).first() is None:
+  if Movies.query.filter_by(mov_name=mov_name).first() is None:
     data = Movies(mov_name, release_year, director, mov_rating,
       runtime, ','.join(genre))
     db.session.add(data)
