@@ -31,11 +31,19 @@ def select():
   :return List of dictionaries. Movies database in index 0, review database in index 1self.
   """
   ds = get_client()
-  movies = ds.query(kind='Movie', order=['mov_name']).fetch()
-
-  review_query = ds.query(kind='Review').fetch()
+  movies_query = ds.query(kind='Movie', order=['mov_name']).fetch()
+  movies = {m['mov_name']: {
+      'release_year': m['release_year'], 
+      'director': m['director'],
+      'mov_rating': m['mov_rating'],
+      'runtime': m['runtime'],
+      'genre': m['genre'].split(',')}
+      for m in movies_query}
+  reviews_query = ds.query(kind='Review').fetch()
   reviews = { r['mov_name']: [] for r in reviews_query }
-  for row in reviews_query:
+  # this is ugly find a way to do it in one
+  review_query = ds.query(kind='Review').fetch()
+  for row in review_query:
     reviews[row['mov_name']].append({
       'review':row['review'],
       'rev_name':row['rev_name'],
@@ -49,8 +57,8 @@ def insert(mov_name, release_year, director, mov_rating,
   then a new entry is created in movies database. Otherwise only review information
   is inserted.
   """
-  ds = get_cliet()
-  if ds.query(kind='Movie').add_filter('mov_name', '=', mov_name).get() is None:
+  ds = get_client()
+  if ds.query(kind='Movie').add_filter('mov_name', '=', mov_name) is None:
     with ds.transaction():
       key = ds.key('Movie')
       movie = datastore.Entity(key=key)
@@ -60,19 +68,19 @@ def insert(mov_name, release_year, director, mov_rating,
         'director': director,
         'mov_rating': mov_rating,
         'runtime': runtime,
-        'genre': genre
+        'genre': genre 
       })
       ds.put(movie)
     with ds.transaction():
       key = ds.key('Review')
-      review = datastore.Entity(key=key)
-      review.update({
+      new_rev = datastore.Entity(key=key)
+      new_rev.update({
         'mov_name': mov_name,
         'review': review,
         'rev_name': rev_name,
         'rev_rating': rev_rating
       })
-      ds.put(review)
+      ds.put(new_rev)
 
 
 def setLanguage(review_lang):

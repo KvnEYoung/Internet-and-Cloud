@@ -29,9 +29,11 @@ def reviews():
   """
   # Databases returned in tuple
   # Must be unpacked before use in render template.
-  dbs = get_model().select()
-
-  return render_template('reviews.html', movies=dbs[0], reviews=dbs[1], language=app.config['LANGUAGE'])
+  model = get_model()
+  dbs = model.select()
+  if dbs is None:
+      dbs = [[],[]]
+  return render_template('reviews.html', movies=dbs[0], reviews=dbs[1], language='en')
 
 @views.route('/submit', methods=['GET', 'POST'])
 def submit():
@@ -45,6 +47,7 @@ def submit():
     'Superhero', 'Thiller', 'War', 'Western']
 
   if request.method == 'POST':
+    model = get_model()
     genre_selected = [gen for gen in genres if gen in request.form]
     model.insert(request.form['mov_name'], request.form['release_year'], \
       request.form['director'], request.form['mov_rating'], \
