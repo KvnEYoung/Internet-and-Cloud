@@ -33,7 +33,7 @@ def select():
   ds = get_client()
   movies = ds.query(kind='Movie', order=['mov_name']).fetch()
 
-  review_query = ds.query(kind='Review').fetch()
+  reviews_query = ds.query(kind='Review').fetch()
   reviews = { r['mov_name']: [] for r in reviews_query }
   for row in reviews_query:
     reviews[row['mov_name']].append({
