@@ -5,6 +5,10 @@ from .Model import Model
 
 db = SQLAlchemy()
 
+def __init__(self):
+	app.config.setdefault('SQLALCHEMY_TRACK_MODIFICATIONS', False)
+	db.init_app(app)
+
 class Movies(db.Model):
     '''
     Model to hold static details for a given movie
@@ -40,8 +44,6 @@ class Reviews(db.Model):
 class model(Model):
 
     def __init__(self):
-        app.config.setdefault('SQLALCHEMY_TRACK_MODIFICATIONS', False)
-        db.init_app(app)
         self.language = "en"
 
     def select(self):
