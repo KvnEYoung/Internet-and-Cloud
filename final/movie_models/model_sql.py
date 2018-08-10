@@ -33,7 +33,7 @@ class model(Model):
         mcursor.close()
         rcursor.close()
         
-        language = 'en'
+        self.language = "en"
 
 
     def select(self):
