@@ -12,7 +12,7 @@ model = mm.get_model()
 
 """ Function decorator using app.route ( '/', index() ). """
 @app.route('/')
-@app.route('/index.html', methods='GET', 'POST'])
+@app.route('/index.html', methods=['GET', 'POST'])
 def index():
 	""" Renders landing page for movie review site. """
 	if request.method == 'GET':
