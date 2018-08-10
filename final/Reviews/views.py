@@ -9,7 +9,7 @@ from Reviews import get_model
 
 views = Blueprint('views', __name__)
 
-@views.route('/')
+@views.route('/', methods=['GET', 'POST'])
 @views.route('/index.html', methods=['GET', 'POST'])
 def index():
   """"
@@ -17,7 +17,8 @@ def index():
   POST request changes language
   """
   if request.method == 'POST':
-     current_app.config['LANGUAGE'] = request.form['review_lang']
+     lang = request.form['review_lang']
+     current_app.config.update(LANGUAGE=lang)
 
   return render_template('index.html', language=current_app.config['LANGUAGE'])
 

@@ -5,6 +5,7 @@ from .Model import Model
 MOVIES_DB = 'movies.db'
 REVIEWS_DB = 'reviews.db'
 
+
 class model(Model):
     def __init__(self):
         """"
