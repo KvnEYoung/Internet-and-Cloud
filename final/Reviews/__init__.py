@@ -28,6 +28,9 @@ def get_model():
     elif model_backend == 'sqlite':
         from . import model_sql
         model = model_sql
+    elif model_backend == 'datastore':
+        from . import model_datastore
+        model = model_datastore
     else:
         raise ValueError(
             "No appropriate databackend configured. "
