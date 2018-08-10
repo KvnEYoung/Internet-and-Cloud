@@ -91,7 +91,7 @@ class model(Model):
         cursor.close()
         
     def setLanguage(self, review_lang):
-		self.language = review_lang
-		
-	def getLanguage(self):
-		return self.language
+        self.language = review_lang
+
+    def getLanguage(self):
+        return self.language
