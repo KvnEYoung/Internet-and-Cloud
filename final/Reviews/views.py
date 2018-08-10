@@ -57,12 +57,12 @@ def submit():
 	
   return render_template('submit.html', genres=genres)
   
-  def translate_text(text):
-	translate_client = translate.Client()
-	language = current_app.config['LANGUAGE']
-	
-	if isinstance(text, six.binary_type):
-		text = text.decode('utf-8')
-		
-	result = translate_client.translate(text, target_language=language)	
-	return print(u.result['translatedText'])
+def translate_text(text):
+  translate_client = translate.Client()
+  language = current_app.config['LANGUAGE']
+  
+  if isinstance(text, six.binary_type):
+    text = text.decode('utf-8')
+  
+  result = translate_client.translate(text, target_language=language)	
+  return print(u.result['translatedText'])
