@@ -18,7 +18,7 @@ class Movies(db.Model):
   :param genre: Genre categories for a movie. Multiple genres are allowed. Stored in a single string
   with each value seperated by a comma
   '''
-  __tablename__ = 'movies'
+  __tablename__ = 'Movies'
   mov_name = db.Column(db.String(255), primary_key=True)
   release_year = db.Column(db.Integer())
   director = db.Column(db.String(255))
@@ -34,7 +34,7 @@ class Reviews(db.Model):
   :param rev_name: Reviewers Name
   :param rev_rating: Reviewers rating, 1-5
   '''
-  __tablename = 'reviews'
+  __tablename = 'Reviews'
   mov_name = db.Column(db.String(255), primary_key=True)
   review = db.Column(db.Text())
   rev_name = db.Column(db.String(255))
@@ -71,7 +71,7 @@ def insert(mov_name, release_year, director, mov_rating,
   then a new entry is created in movies databse. Otherwise only review information
   is inserted.
   """
-  if Movies.query().filter_by(mov_name=mov_name).first() is None:
+  if Movies.query.filter_by(mov_name=mov_name).first() is None:
     data = Movies(mov_name, release_year, director, mov_rating,
       runtime, ','.join(genre))
     db.session.add(data)
