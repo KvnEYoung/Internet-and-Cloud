@@ -1,5 +1,5 @@
-backend = 'sqlite'
-#backend = 'cloudsql'
+#backend = 'sqlite'
+backend = 'cloudsql'
 
 def get_model():
 	if backend == 'sqlite':
