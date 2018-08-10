@@ -49,17 +49,17 @@ def select(self):
     dictionaries using the movie's name as the keyself.
     :return List of dictionaries. Movies database in index 0, review database in index 1self.
     """
-    mov_query = Movies.query(order_by(Movies.mov_name)).all()
+    movies_query = Movies.query(order_by(Movies.mov_name)).all()
     movies = { m['mov_name']: {
                             'release_year': m['release_year'],
                             'director': m['director'],
                             'mov_rating': m['mov_rating'],
                             'runtime': m['runtime'],
                             'genre': m['genre'].split(',') }
-                            for m in mov_query }
+                            for m in movies_query }
 
 
-    review_query = Reviews.query(order_by(Reviews.mov_name).all()
+	reviews_query = Reviews.query(order_by(Reviews.mov_name).all())
     reviews = { r['mov_name']: [] for r in reviews_query }
     for row in reviews_query:
         reviews[row['mov_name']].append({
