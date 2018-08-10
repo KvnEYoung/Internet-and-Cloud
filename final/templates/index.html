@@ -15,7 +15,8 @@
     </select>
     <button type="submit">Submit</button>
   </form>
-  <h4>Current language is: </h4>
+  <h4>Current language is: {{language}}</h4>
+  <br>
   <a href="{{ url_for('reviews') }}">Go to the reviews!</a>
 </center>
 {% endblock %}

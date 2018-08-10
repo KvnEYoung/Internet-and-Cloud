@@ -90,5 +90,8 @@ class model(Model):
         conn.commit()
         cursor.close()
         
-	def setLanguage(self, review_lang):
-		language = review_lang
+    def setLanguage(self, review_lang):
+		self.language = review_lang
+		
+	def getLanguage(self):
+		return self.language

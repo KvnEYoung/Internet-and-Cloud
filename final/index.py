@@ -7,11 +7,14 @@ class index(MethodView):
         """
         Renders landing page for movie review site.
         """
-        return render_template('index.html')
+        model = mm.get_model()
+        language = 'en'
+        #language = model.getLanguage()
+        return render_template('index.html', language=language)
         
     def post(self):
         """
         POST request to process form data to change the langauge of reviews.
         """
         model = mm.get_model()
-        model.setLanguage(request.form[review_lang])
+        model.setLanguage(request.form['review_lang'])
