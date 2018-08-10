@@ -21,6 +21,7 @@ class Movies(db.Model):
     :param genre: Genre categories for a movie. Multiple genres are allowed. Stored in a single string
         with each value seperated by a comma
     '''
+    __tablename__ = 'movies'
     mov_name = db.Column(db.String(255), primary_key=True)
     release_year = db.Column(db.Integer())
     director = db.Column(db.String(255))
@@ -36,6 +37,7 @@ class Reviews(db.Model):
     :param rev_name: Reviewers Name
     :param rev_rating: Reviewers rating, 1-5
     '''
+    __tablename = 'reviews'
     mov_name = db.Column(db.String(255), primary_key=True)
     review = db.TextProperty(db.Text())
     rev_name = db.Column(db.String(255))
