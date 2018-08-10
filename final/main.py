@@ -40,7 +40,7 @@ def submit():
     genres = ['Action', 'Adventure', 'Animation', 'Biography', 'Comedy',
         'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'Film Noir',
         'History', 'Horror', 'Indie','Music', 'Musical', 'Mystery', 'Romance',
-         'Sci-Fi', 'Short', 'Sport', 'Superhero', 'Thiller', 'War', 'Western']
+        'Sci-Fi', 'Short', 'Sport', 'Superhero', 'Thiller', 'War', 'Western']
          
     if request.method == 'GET':
         """ Renders submission form to submit a new movie review. """
