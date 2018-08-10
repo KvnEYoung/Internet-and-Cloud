@@ -14,7 +14,7 @@ views = Blueprint('views', __name__)
 def index():
   """"
   Renders landing page for movie review site.
-  POST request changes language
+  POST request changes language setting
   """
   if request.method == 'POST':
      current_app.config['LANGUAGE'] = request.form['review_lang']
