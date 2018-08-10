@@ -34,12 +34,12 @@ def select():
   """
   ds = get_client()
   movies_query = ds.query(kind='Movie', order=['mov_name']).fetch()
-  movies = {m['mov_name']: {
+  movies = {translate_text(m['mov_name']): {
       'release_year': m['release_year'],
       'director': m['director'],
       'mov_rating': m['mov_rating'],
       'runtime': m['runtime'],
-      'genre': m['genre'].split(',')}
+      'genre': translate_list(m['genre'].split(','))}
       for m in movies_query}
   review_query = ds.query(kind='Review').fetch()
   reviews = dict()
@@ -98,3 +98,9 @@ def translate_text(text):
   
   result = translate_client.translate(text, target_language=language)	
   return result['translatedText']
+  
+def translate_list(list):
+	
+	list = [translate_text(item) for item in list]
+	return list
+		

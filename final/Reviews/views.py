@@ -42,10 +42,12 @@ def submit():
   """
   # Defines available genres for the a movie. Makes list available in GET and POST.
   model = get_model()
-  genres = [model.translate_text('Action'), 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', \
+  genres = ['Action', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', \
     'Documentary', 'Drama', 'Family', 'Fantasy', 'Film Noir', 'History', 'Horror', \
     'Indie','Music', 'Musical', 'Mystery', 'Romance', 'Sci-Fi', 'Short', 'Sport', \
     'Superhero', 'Thiller', 'War', 'Western']
+    
+  translated_genres = model.translate_list(genres)
 
   if request.method == 'POST':
     genre_selected = [gen for gen in genres if gen in request.form]
@@ -56,5 +58,5 @@ def submit():
 
     return redirect(url_for('views.reviews'))
 	
-  return render_template('submit.html', genres=genres)
+  return render_template('submit.html', genres=translated_genres)
   
