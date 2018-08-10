@@ -33,7 +33,7 @@ h1 {
 
 .header a {
   font-family: 'Amaranth';
-  color: ForestGreen;
+  color: Tomato;
   text-decoration: none;
 }
 
@@ -72,6 +72,24 @@ textarea {
   color: white;
   padding: 10px 20px;
   margin: 10px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+}
+.but1 {
+  background-color: ForestGreen;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+}
+.but2 {
+  background-color: Indigo;
+  border: none;
+  color: white;
+  padding: 10px 20px;
   text-align: center;
   display: inline-block;
   font-size: 16px;

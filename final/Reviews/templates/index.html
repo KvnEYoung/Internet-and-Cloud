@@ -16,10 +16,10 @@
     <button type="submit">Submit</button>
   </form>
   <h4>Current language is: {{language}}</h4>
-  <br> 
+  <br>
   <form>
- 	<button type="submit" formaction="{{ url_for('views.reviews') }}" style="background-color:#4d0099; color:white; border-radius: 6px; padding-left: 1.5em; padding-right: 1.5em;">Movie Reviews</button>
-  	<button type="submit" formaction="{{ url_for('views.submit') }}" style="background-color:#008CBA; color:white; border-radius: 6px">Add Movie Review</button>
+ 	<button class="but1" type="submit" formaction="{{ url_for('views.reviews') }}">Movie Reviews</button>
+  	<button class="but2" type="submit" formaction="{{ url_for('views.submit') }}">Add Movie Review</button>
   </form>
 </center>
 {% endblock %}
