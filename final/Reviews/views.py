@@ -61,6 +61,6 @@ def submit():
   return render_template('submit.html', genres=translated_genres)
   
 def full_language():
-  language = {'en': 'English', 'es': 'Spanish', 'fr' : 'French'}
+  language = {'en': 'English', 'es': 'Spanish', 'it' : 'Italian'}
   return  language[current_app.config['LANGUAGE']]
   
