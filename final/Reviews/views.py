@@ -20,7 +20,7 @@ def index():
      lang = request.form['review_lang']
      current_app.config.update(LANGUAGE=lang)
 
-  return render_template('index.html', language=current_app.config['LANGUAGE'])
+  return render_template('index.html', language=full_language())
 
 @views.route('/reviews')
 def reviews():
@@ -33,7 +33,7 @@ def reviews():
   dbs = model.select()
   if dbs is None:
       dbs = [[],[]]
-  return render_template('reviews.html', movies=dbs[0], reviews=dbs[1], language=current_app.config['LANGUAGE'])
+  return render_template('reviews.html', movies=dbs[0], reviews=dbs[1])
 
 @views.route('/submit', methods=['GET', 'POST'])
 def submit():
@@ -59,4 +59,8 @@ def submit():
     return redirect(url_for('views.reviews'))
 	
   return render_template('submit.html', genres=translated_genres)
+  
+def full_language():
+  language = {'en': 'English', 'es': 'Spanish', 'fr' : 'French'}
+  return  language[current_app.config['LANGUAGE']]
   
