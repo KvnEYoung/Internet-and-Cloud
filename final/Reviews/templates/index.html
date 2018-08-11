@@ -3,23 +3,23 @@
 
 {% block content %}
 <center>
-  <h1>Welcome to Ripe Tomatoes</h1>
-  <h3>A fresher movie review site</h3>
+  <h1>{{text[0]}}</h1>
+  <h3>{{text[1]}}</h3>
   <br>
-  <h4>Please select the review language</h4>
+  <h4>{{text[2]}}</h4>
   <form method="POST" action="">
     <select name="review_lang">
-      <option value="en">English</option>
-      <option value="es">Spanish</option>
-      <option value="it">Italian</option>
+      <option value="en">{{text[3]}}</option>
+      <option value="es">{{text[4]}}</option>
+      <option value="it">{{text[5]}}</option>
     </select>
-    <button type="submit">Submit</button>
+    <button type="submit">{{text[6]}}</button>
   </form>
-  <h4>Current language is: {{language}}</h4>
+  <h4>{{text[7]}}: {{language}}</h4>
   <br>
   <form>
- 	<button type="submit" formaction="{{ url_for('views.reviews') }}" style="background-color:#4d0099; color:white; border-radius: 6px; padding-left: 1.5em; padding-right: 1.5em;">Movie Reviews</button>
-  	<button type="submit" formaction="{{ url_for('views.submit') }}" style="background-color:#008CBA; color:white; border-radius: 6px">Add Movie Review</button>
+ 	<button type="submit" formaction="{{ url_for('views.reviews') }}" style="background-color:#4d0099; color:white; border-radius: 6px; padding-left: 1.5em; padding-right: 1.5em;">{{text[8]}}</button>
+  	<button type="submit" formaction="{{ url_for('views.submit') }}" style="background-color:#008CBA; color:white; border-radius: 6px">{{text[9]}}</button>
   </form>
 </center>
 {% endblock %}

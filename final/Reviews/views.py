@@ -16,11 +16,18 @@ def index():
   Renders landing page for movie review site.
   POST request changes language setting
   """
+  model = get_model()
+  pageText = ['Welcome to Ripe Tomatoes', 'A fresher movie review site', 'Please select the review language',
+  	'English', 'Spanish', 'Italian', 'Submit', 'Current language is', 'Movie Reviews', 'Add Movie Reviews']
+  pageTranslation = model.translate_list(pageText)
+  
   if request.method == 'POST':
      lang = request.form['review_lang']
      current_app.config.update(LANGUAGE=lang)
-
-  return render_template('index.html', language=full_language())
+     return redirect(url_for('views.index'))
+     
+  return render_template('index.html', language=full_language(), text=pageTranslation)
+  
 
 @views.route('/reviews')
 def reviews():
@@ -61,6 +68,7 @@ def submit():
   return render_template('submit.html', genres=translated_genres)
   
 def full_language():
+  model = get_model()
   language = {'en': 'English', 'es': 'Spanish', 'it' : 'Italian'}
-  return  language[current_app.config['LANGUAGE']]
+  return  model.translate_text(language[current_app.config['LANGUAGE']])
   
