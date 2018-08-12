@@ -40,7 +40,12 @@ def reviews():
   dbs = model.select()
   if dbs is None:
       dbs = [[],[]]
-  return render_template('reviews.html', movies=dbs[0], reviews=dbs[1])
+
+  pageText = ['Movie Reviews!', 'Main Page', 'Add Movie Review', 'Directed By', 'Released', 'Rating', 'Runtime', 
+  	'Genre', 'Rating', 'Author']
+  pageTranslation = model.translate_list(pageText)
+  
+  return render_template('reviews.html', movies=dbs[0], reviews=dbs[1], text=pageTranslation)
 
 @views.route('/submit', methods=['GET', 'POST'])
 def submit():

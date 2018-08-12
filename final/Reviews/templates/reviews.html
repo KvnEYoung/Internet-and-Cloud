@@ -1,26 +1,26 @@
 {% extends "base.html" %}
 {% block title %} Reviews {% endblock %}
 {% block content %}
-<center style="font-size: 4em; font-variant: small-caps;">Movie Reviews!</center>
+<center style="font-size: 4em; font-variant: small-caps;">{{text[0]}}</center>
 <center>
   <form>
-  	<button type="submit" formaction="{{ url_for('views.index') }}" style="background-color:#4d0099; color:white; border-radius: 6px; padding-left: 2.6em; padding-right: 2.6em;">Main Page</button>
-  	<button type="submit" formaction="{{ url_for('views.submit') }}" style="background-color:#008CBA; color:white; border-radius: 6px">Add Movie Review</button>
+  	<button type="submit" formaction="{{ url_for('views.index') }}" style="background-color:#4d0099; color:white; border-radius: 6px; padding-left: 2.6em; padding-right: 2.6em;">{{text[1]}}</button>
+  	<button type="submit" formaction="{{ url_for('views.submit') }}" style="background-color:#008CBA; color:white; border-radius: 6px">{{text[2]}}</button>
   </form>
 </center>
 {% for movie in movies %}
 <div class="card">
   <h1>{{ movie }}</h1>
-  Directed By: {{ movies[movie]['director']}}<br>
-  Released: {{ movies[movie]['release_year'] }}<br>
-  Rating: {{ movies[movie]['mov_rating'] }}<br>
-  Runtime: {{ movies[movie]['runtime'] }} min<br>
-  Genre: {{ ', '.join(movies[movie]['genre']) }} <br><br>
+  {{text[3]}}: {{ movies[movie]['director']}}<br>
+  {{text[4]}}: {{ movies[movie]['release_year'] }}<br>
+  {{text[5]}}: {{ movies[movie]['mov_rating'] }}<br>
+  {{text[6]}}: {{ movies[movie]['runtime'] }} min<br>
+  {{text[7]}}: {{ ', '.join(movies[movie]['genre']) }} <br><br>
   {% for review in reviews[movie] %}
   <div class="ele">
       {{ review['review'] }}<br><br>
-    Rating: {{ review['rev_rating'] }}/5<br>
-    Author: {{ review['rev_name'] }}<br>
+    {{text[8]}}: {{ review['rev_rating'] }}/5<br>
+    {{text[9]}}: {{ review['rev_name'] }}<br>
   </div>
   {% endfor %}
 </div>
