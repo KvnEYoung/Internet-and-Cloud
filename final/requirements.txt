@@ -4,4 +4,6 @@ Flask-SQLAlchemy
 PyMySql==0.8.0
 google-cloud-datastore
 google-cloud-translate
+google-cloud-speech
+pyaudio
 six
