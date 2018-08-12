@@ -6,6 +6,7 @@ Movie review flask app
 
 from flask import Flask, redirect, request, url_for, render_template, current_app, Blueprint
 from Reviews import get_model
+from .talktome import read_text
 
 views = Blueprint('views', __name__)
 
@@ -20,20 +21,23 @@ def index():
   pageText = ['Welcome to Ripe Tomatoes', 'A fresher movie review site', 'Please select the review language',
   	'English', 'Spanish', 'Italian', 'Submit', 'Current language is', 'Movie Reviews', 'Add Movie Reviews']
   pageTranslation = model.translate_list(pageText)
-  
+
   if request.method == 'POST':
      lang = request.form['review_lang']
      current_app.config.update(LANGUAGE=lang)
      return redirect(url_for('views.index'))
-     
-  return render_template('index.html', language=full_language(), text=pageTranslation)
-  
 
-@views.route('/reviews')
+  return render_template('index.html', language=full_language(), text=pageTranslation)
+
+
+@views.route('/reviews', methods=['GET', 'POST'])
 def reviews():
   """
   Renders all reviews from the model.
   """
+  if request.method == 'POST':
+      #stream = read_text(request.form['synth'])
+      return redirect(url_for('views.synth'))
   # Databases returned in tuple
   # Must be unpacked before use in render template.
   model = get_model()
@@ -41,10 +45,10 @@ def reviews():
   if dbs is None:
       dbs = [[],[]]
 
-  pageText = ['Movie Reviews!', 'Main Page', 'Add Movie Review', 'Directed By', 'Released', 'Rating', 'Runtime', 
+  pageText = ['Movie Reviews!', 'Main Page', 'Add Movie Review', 'Directed By', 'Released', 'Rating', 'Runtime',
   	'Genre', 'Rating', 'Author']
   pageTranslation = model.translate_list(pageText)
-  
+
   return render_template('reviews.html', movies=dbs[0], reviews=dbs[1], text=pageTranslation)
 
 @views.route('/submit', methods=['GET', 'POST'])
@@ -56,13 +60,13 @@ def submit():
   pageText = ['Name of Movie', 'Released', 'Year', 'Director', 'Movie Rated', 'Not Rated',
   	'Runtime', 'minutes', 'Genres', "Write your review here", 'Rating', 'Reviewed by',
   	'Submit Review', 'Main Page']
-  
+
   # Defines available genres for the a movie. Makes list available in GET and POST.
   genres = ['Action', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', \
     'Documentary', 'Drama', 'Family', 'Fantasy', 'Film Noir', 'History', 'Horror', \
     'Indie','Music', 'Musical', 'Mystery', 'Romance', 'Sci-Fi', 'Short', 'Sport', \
     'Superhero', 'Thiller', 'War', 'Western']
-        
+
   pageTranslation = model.translate_list(pageText)
   genresTranslation = model.translate_list(genres)
 
@@ -74,11 +78,14 @@ def submit():
       request.form['rev_name'], request.form['rev_rating'])
 
     return redirect(url_for('views.reviews'))
-	
+
   return render_template('submit.html', genres=genresTranslation, text=pageTranslation)
-  
+
+@views.route('/synth')
+def synth():
+    return render_template('synth.html')
+
 def full_language():
   model = get_model()
   language = {'en': 'English', 'es': 'Spanish', 'it' : 'Italian'}
   return  model.translate_text(language[current_app.config['LANGUAGE']])
-  

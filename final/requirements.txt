@@ -1,9 +1,6 @@
 flask
 gunicorn
-Flask-SQLAlchemy
-PyMySql==0.8.0
 google-cloud-datastore
 google-cloud-translate
-google-cloud-speech
-pyaudio
+google-cloud-texttospeech==0.2.0
 six

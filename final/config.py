@@ -1,4 +1,5 @@
 LANGUAGE = 'en'
+VOICE = 'en-GB-Standard-A'
 PROJECT_ID = 'lund-young-510'
 DATA_BACKEND = 'datastore'
 SECRET_KEY = 'banana'

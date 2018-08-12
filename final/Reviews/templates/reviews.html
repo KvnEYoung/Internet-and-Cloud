@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %} Reviews {% endblock %}
 {% block content %}
-<center style="font-size: 4em; font-variant: small-caps;">{{text[0]}}</center>
+<center class="logo">{{text[0]}}</center>
 <center>
   <form>
   	<button type="submit" formaction="{{ url_for('views.index') }}" style="background-color:#4d0099; color:white; border-radius: 6px; padding-left: 2.6em; padding-right: 2.6em;">{{text[1]}}</button>
@@ -18,6 +18,9 @@
   {{text[7]}}: {{ ', '.join(movies[movie]['genre']) }} <br><br>
   {% for review in reviews[movie] %}
   <div class="ele">
+    <form>
+      <button type=submit name="synth" value={{ review['review'] }}>Talk to me</button>
+    </form><br>
       {{ review['review'] }}<br><br>
     {{text[8]}}: {{ review['rev_rating'] }}/5<br>
     {{text[9]}}: {{ review['rev_name'] }}<br>

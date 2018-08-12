@@ -6,6 +6,10 @@ html {
 h1 {
   padding: 5px;
 }
+.logo {
+  font-size: 4em;
+  font-variant: small-caps;
+}
 .entry_field {
   border-style: none;
   border-bottom-style: solid;

@@ -4,16 +4,17 @@ from google.cloud import datastore
 from google.cloud import translate
 import six
 
-builin_list = list
-#  Model to hold static details for a given movie
-# :param mov_name: Name of the movie
+#  Movie Model
+#  Holds static details for a given movie
+#  :param mov_name: Name of the movie
 #  :param director: Director
 #  :param mov_rating: MPAA rating (i.e G, PG-13, R, etc)
 #  :param runtime: Runtime in minutes
 #  :param genre: Genre categories for a movie. Multiple genres are allowed. Stored in a single string
 #  with each value seperated by a comma
 
-#  Model to hold reviews. mov_name acts as a key to associate each entry with Movie model
+#  Review Model
+#  Hold reviews. mov_name acts as a key to associate each entry with Movie model
 #  :param mov_name: Name of the movie
 #  :param review: Text of the review
 #  :param rev_name: Reviewers Name
@@ -56,7 +57,7 @@ def select():
 def insert(mov_name, release_year, director, mov_rating,
 		runtime, genre, review, rev_name, rev_rating):
   """
-  Inserts a new review into databases. If it is the first revew for a movies
+  Inserts a new review into databases. If it is the first review for a movies
   then a new entry is created in movies database. Otherwise only review information
   is inserted.
   """
@@ -88,19 +89,18 @@ def insert(mov_name, release_year, director, mov_rating,
 
 def getLanguage():
   return current_app.config['LANGUAGE']
-  
+
 def translate_text(text):
   translate_client = translate.Client()
   language = getLanguage()
-  
+
   if isinstance(text, six.binary_type):
     text = text.decode('utf-8')
-  
-  result = translate_client.translate(text, target_language=language)	
+
+  result = translate_client.translate(text, target_language=language)
   return result['translatedText']
-  
+
 def translate_list(list):
-	
+
 	list = [translate_text(item) for item in list]
 	return list
-		
