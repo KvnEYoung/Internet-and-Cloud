@@ -52,14 +52,19 @@ def submit():
   """
   Renders submission form to submit a new movie review.
   """
-  # Defines available genres for the a movie. Makes list available in GET and POST.
   model = get_model()
+  pageText = ['Name of Movie', 'Released', 'Year', 'Director', 'Movie Rated', 'Not Rated',
+  	'Runtime', 'minutes', 'Genres', "Write your review here", 'Rating', 'Reviewed by',
+  	'Submit Review', 'Main Page']
+  
+  # Defines available genres for the a movie. Makes list available in GET and POST.
   genres = ['Action', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', \
     'Documentary', 'Drama', 'Family', 'Fantasy', 'Film Noir', 'History', 'Horror', \
     'Indie','Music', 'Musical', 'Mystery', 'Romance', 'Sci-Fi', 'Short', 'Sport', \
     'Superhero', 'Thiller', 'War', 'Western']
-    
-  translated_genres = model.translate_list(genres)
+        
+  pageTranslation = model.translate_list(pageText)
+  genresTranslation = model.translate_list(genres)
 
   if request.method == 'POST':
     genre_selected = [gen for gen in genres if gen in request.form]
@@ -70,7 +75,7 @@ def submit():
 
     return redirect(url_for('views.reviews'))
 	
-  return render_template('submit.html', genres=translated_genres)
+  return render_template('submit.html', genres=genresTranslation, text=pageTranslation)
   
 def full_language():
   model = get_model()
