@@ -3,4 +3,5 @@ gunicorn
 google-cloud-datastore
 google-cloud-translate
 google-cloud-texttospeech==0.2.0
+google-cloud-storage
 six

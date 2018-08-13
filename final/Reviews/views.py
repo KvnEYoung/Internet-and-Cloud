@@ -11,7 +11,7 @@ from .talktome import read_text
 views = Blueprint('views', __name__)
 
 @views.route('/', methods=['GET', 'POST'])
-@views.route('/index.html', methods=['GET', 'POST'])
+@views.route('/index', methods=['GET', 'POST'])
 def index():
   """"
   Renders landing page for movie review site.
@@ -35,21 +35,29 @@ def reviews():
   """
   Renders all reviews from the model.
   """
-  if request.method == 'POST':
-      #stream = read_text(request.form['synth'])
-      return redirect(url_for('views.synth'))
-  # Databases returned in tuple
+   # Databases returned in tuple (Movie, Review)
   # Must be unpacked before use in render template.
   model = get_model()
   dbs = model.select()
   if dbs is None:
       dbs = [[],[]]
+  movies = dbs[0]
+  reviews = dbs[1]
+  if request.method == 'POST':
+      text = 'placeholder'
+      id = int(request.form['synth'])
+      for row in reviews.values():
+          for list_element in row:
+              if id == list_element['id']:
+                  text = list_element['review']
+      stream = read_text(text)
+      return redirect(url_for('views.synth', stream=stream))
 
   pageText = ['Movie Reviews!', 'Main Page', 'Add Movie Review', 'Directed By', 'Released', 'Rating', 'Runtime',
   	'Genre', 'Rating', 'Author']
   pageTranslation = model.translate_list(pageText)
 
-  return render_template('reviews.html', movies=dbs[0], reviews=dbs[1], text=pageTranslation)
+  return render_template('reviews.html', movies=movies, reviews=reviews, text=pageTranslation)
 
 @views.route('/submit', methods=['GET', 'POST'])
 def submit():
@@ -81,9 +89,10 @@ def submit():
 
   return render_template('submit.html', genres=genresTranslation, text=pageTranslation)
 
-@views.route('/synth')
-def synth():
-    return render_template('synth.html')
+@views.route('/synth/<id>')
+def synth(id):
+    # get id file
+    return render_template('synth.html', stream=stream)
 
 def full_language():
   model = get_model()

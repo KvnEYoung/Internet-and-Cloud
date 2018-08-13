@@ -44,6 +44,7 @@ def select():
       for m in movies_query}
   review_query = ds.query(kind='Review').fetch()
   reviews = dict()
+  id = 0
   for row in review_query:
     if row['mov_name'] not in reviews:
       reviews[row['mov_name']] = []
@@ -51,7 +52,9 @@ def select():
     reviews[row['mov_name']].append({
       'review':translate_text(row['review']),
       'rev_name':row['rev_name'],
-      'rev_rating':row['rev_rating'] })
+      'rev_rating':row['rev_rating'],
+      'id': id})
+    id += 1
   return [movies, reviews]
 
 def insert(mov_name, release_year, director, mov_rating,
@@ -62,7 +65,9 @@ def insert(mov_name, release_year, director, mov_rating,
   is inserted.
   """
   ds = get_client()
-  if ds.query(kind='Movie').add_filter('mov_name', '=', mov_name) is None:
+  check = ds.query(kind='Movie')
+  check.add_filter('mov_name', '=', mov_name)
+  if check.fetch(1) is None:
     with ds.transaction():
       key = ds.key('Movie')
       movie = datastore.Entity(key=key)
@@ -75,17 +80,17 @@ def insert(mov_name, release_year, director, mov_rating,
         'genre': genre
       })
       ds.put(movie)
-    with ds.transaction():
-      key = ds.key('Review')
-      new_rev = datastore.Entity(key=key)
-      new_rev.update({
-        'mov_name': mov_name,
-        'review': review,
-        'rev_name': rev_name,
-        'rev_rating': rev_rating
-      })
-      ds.put(new_rev)
 
+  with ds.transaction():
+    key = ds.key('Review')
+    new_rev = datastore.Entity(key=key)
+    new_rev.update({
+      'mov_name': mov_name,
+      'review': review,
+      'rev_name': rev_name,
+      'rev_rating': rev_rating
+    })
+    ds.put(new_rev)
 
 def getLanguage():
   return current_app.config['LANGUAGE']
