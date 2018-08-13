@@ -35,7 +35,7 @@ def reviews():
   """
   Renders all reviews from the model.
   """
-   # Databases returned in tuple (Movie, Review)
+  # Databases returned in tuple (Movie, Review)
   # Must be unpacked before use in render template.
   model = get_model()
   dbs = model.select()
@@ -46,6 +46,7 @@ def reviews():
   if request.method == 'POST':
       text = 'placeholder'
       id = int(request.form['synth'])
+      # Find text associated with review id - super ugly
       for row in reviews.values():
           for list_element in row:
               if id == list_element['id']:
@@ -89,12 +90,14 @@ def submit():
 
   return render_template('submit.html', genres=genresTranslation, text=pageTranslation)
 
-@views.route('/synth/<id>')
-def synth(id):
+@views.route('/synth/<filename>')
+def synth(filename):
     # get id file
-
+    gcs_file = gcs.open(filename)
+    audio = gcs_file.read()
+    gcs_file.close()
     textTranslation = model.translate_text('Your browser does not support the audio element.')
-    return render_template('synth.html', stream=stream, text=textTranslation)
+    return render_template('synth.html', audio=audio, static_text=textTranslation)
 
 def full_language():
   model = get_model()
