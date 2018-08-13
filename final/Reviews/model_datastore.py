@@ -92,12 +92,10 @@ def insert(mov_name, release_year, director, mov_rating,
     })
     ds.put(new_rev)
 
-def getLanguage():
-  return current_app.config['LANGUAGE']
 
 def translate_text(text):
   translate_client = translate.Client()
-  language = getLanguage()
+  language = current_app.config['LANGUAGE']
 
   if isinstance(text, six.binary_type):
     text = text.decode('utf-8')

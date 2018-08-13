@@ -54,7 +54,7 @@ def reviews():
       return redirect(url_for('views.synth', stream=stream))
 
   pageText = ['Movie Reviews!', 'Main Page', 'Add Movie Review', 'Directed By', 'Released', 'Rating', 'Runtime',
-  	'Genre', 'Rating', 'Author']
+  	'Genre', 'Talk to me', 'Rating', 'Author']
   pageTranslation = model.translate_list(pageText)
 
   return render_template('reviews.html', movies=movies, reviews=reviews, text=pageTranslation)
@@ -92,7 +92,9 @@ def submit():
 @views.route('/synth/<id>')
 def synth(id):
     # get id file
-    return render_template('synth.html', stream=stream)
+
+    textTranslation = model.translate_text('Your browser does not support the audio element.')
+    return render_template('synth.html', stream=stream, text=textTranslation)
 
 def full_language():
   model = get_model()

@@ -91,8 +91,17 @@ class model(Model):
         conn.commit()
         cursor.close()
         
-    def setLanguage(self, review_lang):
-        current_app.config['LANGUAGE'] = review_lang
+def translate_text(text):
+  translate_client = translate.Client()
+  language = current_app.config['LANGUAGE']
 
-    def getLanguage(self):
-        return current_app.config['LANUAGE']
+  if isinstance(text, six.binary_type):
+    text = text.decode('utf-8')
+
+  result = translate_client.translate(text, target_language=language)
+  return result['translatedText']
+
+def translate_list(list):
+
+	list = [translate_text(item) for item in list]
+	return list
