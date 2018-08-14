@@ -103,7 +103,7 @@ def synth(filename):
     bucket = storage.Client().get_bucket('lund-young-510')
     blob = bucket.get_blob(filename)
     audio = blob.public_url
-    pageTranslation = translate_text('Your browser does not support the audio element.', 'Movie Reviews')
+    pageTranslation = translate_list('Your browser does not support the audio element.', 'Movie Reviews')
     return render_template('synth.html', audio=audio, text=pageTranslation)
 
 def full_language():
