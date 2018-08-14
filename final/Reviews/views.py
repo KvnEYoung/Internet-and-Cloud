@@ -22,7 +22,7 @@ def index():
   model = get_model()
   pageText = ['Welcome to Ripe Tomatoes', 'A fresher movie review site', 'Please select the review language',
   	'English', 'Spanish', 'Italian', 'Submit', 'Current language is', 'Movie Reviews', 'Add Movie Reviews']
-  pageTranslation = model.translate_list(pageText)
+  pageTranslation = translate_list(pageText)
 
   if request.method == 'POST':
      lang = request.form['review_lang']
@@ -98,7 +98,7 @@ def synth(filename):
     bucket = storage.Client().get_bucket('lund-young-510')
     blob = bucket.get_blob(filename)
     audio = blob.public_url
-    textTranslation = model.translate_text('Your browser does not support the audio element.')
+    textTranslation = translate_text('Your browser does not support the audio element.')
     return render_template('synth.html', audio=audio, static_text=textTranslation)
 
 def full_language():

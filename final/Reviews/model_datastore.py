@@ -45,10 +45,10 @@ def select():
   reviews = dict()
   id = 0
   for row in review_query:
-    if translate_text(row['mov_name']) not in reviews:
+    if row['mov_name'] not in reviews:
       reviews[row['mov_name']] = []
 
-    reviews[row['mov_name']].append({
+    reviews[(translate_text(row['mov_name'])].append({
       'review':translate_text(row['review']),
       'rev_name':row['rev_name'],
       'rev_rating':row['rev_rating'],
