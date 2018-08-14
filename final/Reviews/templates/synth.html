@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 {% block title %} Reading Rainbow {% endblock %}
 {% block content %}
-<audio controls>
-  <source src="{{ audio }}" type="audio/mp3">
-  {{ static_text }}
-</audio>
-<br>
+<center>
+  <br>
+  <audio controls>
+    <source src="{{ audio }}" type="audio/mp3">
+      {{ static_text }}
+  </audio>
+  <br>
+  <br>
+  <br>
+  <form>
+    <button type="submit" formaction="{{ url_for('views.reviews') }}" style="background-color:#4d0099; color:white; border-radius: 6px; padding-left: 1.5em; padding-right: 1.5em;">Movie Reviews</button>
+  </form>
+</center>
 {% endblock %}
