@@ -105,13 +105,8 @@ textarea {
 
 .microphone {
   background-color: inherit;
-  border: solid;
   color: black;
   padding: 12px 16px;
   cursor: pointer;
   font-size: 16px;
-}
-
-.microphone:hover {
-  background-color: 
 }
