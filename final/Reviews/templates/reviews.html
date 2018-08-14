@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% block title %} Reviews {% endblock %}
 {% block content %}
 <center class="logo">{{text[0]}}</center>
@@ -19,7 +20,7 @@
   {% for review in reviews[movie] %}
   <div class="ele">
     <form method="post">
-      <button type=submit name="synth" value={{ review['id'] }}>{{text[8]}}</button>
+	    <button type=submit name="synth" value={{ review['id'] }}><i class="fa fa-microphone"></i></button>
     </form><br>
       {{ review['review'] }}<br><br>
     {{text[9]}}: {{ review['rev_rating'] }}/5<br>
