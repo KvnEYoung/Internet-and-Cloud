@@ -7,6 +7,7 @@ Movie review flask app
 from flask import Flask, redirect, request, url_for, render_template, current_app, Blueprint
 from Reviews import get_model
 from .talktome import read_text
+from .translate import translate_text, translate_list
 from google.cloud import storage
 
 views = Blueprint('views', __name__)
@@ -57,7 +58,7 @@ def reviews():
 
   pageText = ['Movie Reviews!', 'Main Page', 'Add Movie Review', 'Directed By', 'Released', 'Rating', 'Runtime',
   	'Genre', 'Talk to me', 'Rating', 'Author']
-  pageTranslation = model.translate_list(pageText)
+  pageTranslation = translate_list(pageText)
 
   return render_template('reviews.html', movies=movies, reviews=reviews, text=pageTranslation)
 
@@ -77,8 +78,8 @@ def submit():
     'Indie','Music', 'Musical', 'Mystery', 'Romance', 'Sci-Fi', 'Short', 'Sport', \
     'Superhero', 'Thiller', 'War', 'Western']
 
-  pageTranslation = model.translate_list(pageText)
-  genresTranslation = model.translate_list(genres)
+  pageTranslation = translate_list(pageText)
+  genresTranslation = translate_list(genres)
 
   if request.method == 'POST':
     genre_selected = [gen for gen in genres if gen in request.form]
@@ -101,6 +102,5 @@ def synth(filename):
     return render_template('synth.html', audio=audio, static_text=textTranslation)
 
 def full_language():
-  model = get_model()
   language = {'en': 'English', 'es': 'Spanish', 'it' : 'Italian'}
-  return  model.translate_text(language[current_app.config['LANGUAGE']])
+  return  translate_text(language[current_app.config['LANGUAGE']])
