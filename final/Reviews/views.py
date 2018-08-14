@@ -99,11 +99,14 @@ def submit():
 
 @views.route('/synth/<filename>')
 def synth(filename):
-
     bucket = storage.Client().get_bucket('lund-young-510')
     blob = bucket.get_blob(filename)
     audio = blob.public_url
-    pageTranslation = translate_list('Your browser does not support the audio element.', 'Movie Reviews')
+    
+    #Creates a list of the html page text and translates it for use in the synth page.
+    pageText = ['Your browser does not support the audio element.', 'Movie Reviews']
+    pageTranslation = translate_list(pageText)
+
     return render_template('synth.html', audio=audio, text=pageTranslation)
 
 def full_language():
