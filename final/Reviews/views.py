@@ -22,7 +22,7 @@ def index():
 
   #Creates a list of the html page text and translates it for use in the index page.
   pageText = ['Welcome to Ripe Tomatoes', 'A fresher movie review site', 'Please select the review language',
-  	'English', 'Spanish', 'Italian', 'French', 'Russian', 'Chinese', 'Submit', 'Current language is', 
+  	'English', 'French', 'Italian', 'Korean', 'Spanish', 'Turkish', 'Submit', 'Current language is', 
     'Movie Reviews', 'Add Movie Reviews']
   pageTranslation = translate_list(pageText)
 
@@ -111,5 +111,5 @@ def synth(filename):
 
 def full_language():
   """Takes the encoded language and returns the full language for the index html page."""
-  language = {'en': 'English', 'es': 'Spanish', 'it' : 'Italian', 'fr': 'French', 'ru': 'Russian', 'zh-TW': 'Chinese'}
+  language = {'en': 'English', 'es': 'Spanish', 'it' : 'Italian', 'fr': 'French', 'tr': 'Turkish', 'ko': 'Korean'}
   return  translate_text(language[current_app.config['LANGUAGE']])
