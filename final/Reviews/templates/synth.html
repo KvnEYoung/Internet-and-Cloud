@@ -5,13 +5,13 @@
   <br>
   <audio controls>
     <source src="{{ audio }}" type="audio/mp3">
-      {{ static_text }}
+      {{ text[0] }}
   </audio>
   <br>
   <br>
   <br>
   <form>
-    <button type="submit" formaction="{{ url_for('views.reviews') }}" style="background-color:#4d0099; color:white; border-radius: 6px; padding-left: 1.5em; padding-right: 1.5em;">Movie Reviews</button>
+    <button type="submit" formaction="{{ url_for('views.reviews') }}" style="background-color:#4d0099; color:white; border-radius: 6px; padding-left: 1.5em; padding-right: 1.5em;">{{ text[1] }}</button>
   </form>
 </center>
 {% endblock %}

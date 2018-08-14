@@ -22,7 +22,8 @@ def index():
 
   #Creates a list of the html page text and translates it for use in the index page.
   pageText = ['Welcome to Ripe Tomatoes', 'A fresher movie review site', 'Please select the review language',
-  	'English', 'Spanish', 'Italian', 'Submit', 'Current language is', 'Movie Reviews', 'Add Movie Reviews']
+  	'English', 'Spanish', 'Italian', 'French', 'Russian', 'Chinese', 'Submit', 'Current language is', 
+    'Movie Reviews', 'Add Movie Reviews']
   pageTranslation = translate_list(pageText)
 
   if request.method == 'POST':
@@ -59,7 +60,7 @@ def reviews():
 
   #Creates a list of the html page text and translates it for use in the reviews page.
   pageText = ['Movie Reviews!', 'Main Page', 'Add Movie Review', 'Directed By', 'Released', 'Rating', 'Runtime',
-  	'Genre', 'Talk to me', 'Rating', 'Author']
+  	'Genre', 'Rating', 'Author']
   pageTranslation = translate_list(pageText)
 
   return render_template('reviews.html', movies=movies, reviews=reviews, text=pageTranslation)
@@ -102,10 +103,10 @@ def synth(filename):
     bucket = storage.Client().get_bucket('lund-young-510')
     blob = bucket.get_blob(filename)
     audio = blob.public_url
-    textTranslation = translate_text('Your browser does not support the audio element.')
-    return render_template('synth.html', audio=audio, static_text=textTranslation)
+    pageTranslation = translate_text('Your browser does not support the audio element.', 'Movie Reviews')
+    return render_template('synth.html', audio=audio, text=pageTranslation)
 
 def full_language():
   """Takes the encoded language and returns the full language for the index html page."""
-  language = {'en': 'English', 'es': 'Spanish', 'it' : 'Italian'}
+  language = {'en': 'English', 'es': 'Spanish', 'it' : 'Italian', 'fr': 'French', 'ru': 'Russian', 'zh-TW': 'Chinese'}
   return  translate_text(language[current_app.config['LANGUAGE']])
