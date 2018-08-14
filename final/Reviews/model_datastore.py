@@ -48,7 +48,7 @@ def select():
     if row['mov_name'] not in reviews:
       reviews[row['mov_name']] = []
 
-    reviews[(translate_text(row['mov_name'])].append({
+    reviews[translate_text(row['mov_name'])].append({
       'review':translate_text(row['review']),
       'rev_name':row['rev_name'],
       'rev_rating':row['rev_rating'],
