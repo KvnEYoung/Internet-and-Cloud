@@ -2,8 +2,8 @@
 {% block title %} Reading Rainbow {% endblock %}
 {% block content %}
 <audio controls>
-  <source src="{{ stream }}" type="audio/mp3">
-  {{text}}
+  <source src="{{ audio }}" type="audio/mp3">
+  {{static_text}}
 </audio>
-Stream: {{ stream }}
+<br>
 {% endblock %}

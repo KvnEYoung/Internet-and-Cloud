@@ -7,6 +7,7 @@ Movie review flask app
 from flask import Flask, redirect, request, url_for, render_template, current_app, Blueprint
 from Reviews import get_model
 from .talktome import read_text
+from google.cloud import storage
 
 views = Blueprint('views', __name__)
 
@@ -51,8 +52,8 @@ def reviews():
           for list_element in row:
               if id == list_element['id']:
                   text = list_element['review']
-      stream = read_text(text)
-      return redirect(url_for('views.synth', stream=stream))
+      filename = read_text(text)
+      return redirect(url_for('views.synth', filename=filename))
 
   pageText = ['Movie Reviews!', 'Main Page', 'Add Movie Review', 'Directed By', 'Released', 'Rating', 'Runtime',
   	'Genre', 'Talk to me', 'Rating', 'Author']
@@ -92,12 +93,12 @@ def submit():
 
 @views.route('/synth/<filename>')
 def synth(filename):
-    # get id file
-    gcs_file = gcs.open(filename)
-    audio = gcs_file.read()
-    gcs_file.close()
-    textTranslation = model.translate_text('Your browser does not support the audio element.')
-    return render_template('synth.html', audio=audio, static_text=textTranslation)
+    bucket = storage.Client().get_bucket('lund-young-510')
+    blob = bucket.get_blob(filename)
+    audio = blob.public_url
+    #textTranslation = model.translate_text('Your browser does not support the audio element.')
+    static_text = ("your browser does not support the audio element.")
+    return render_template('synth.html', audio=audio, static_text=static_text)
 
 def full_language():
   model = get_model()
