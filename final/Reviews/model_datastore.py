@@ -45,7 +45,7 @@ def select():
   reviews = dict()
   id = 0
   for row in review_query:
-    if row['mov_name'] not in reviews:
+    if translate_text(row['mov_name']) not in reviews:
       reviews[row['mov_name']] = []
 
     reviews[row['mov_name']].append({
