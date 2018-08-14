@@ -93,12 +93,12 @@ def submit():
 
 @views.route('/synth/<filename>')
 def synth(filename):
+    model = get_model()
     bucket = storage.Client().get_bucket('lund-young-510')
     blob = bucket.get_blob(filename)
     audio = blob.public_url
-    #textTranslation = model.translate_text('Your browser does not support the audio element.')
-    static_text = ("your browser does not support the audio element.")
-    return render_template('synth.html', audio=audio, static_text=static_text)
+    textTranslation = model.translate_text('Your browser does not support the audio element.')
+    return render_template('synth.html', audio=audio, static_text=textTranslation)
 
 def full_language():
   model = get_model()
