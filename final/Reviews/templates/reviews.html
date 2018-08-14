@@ -19,7 +19,7 @@
   {% for review in reviews[movie] %}
   <div class="ele">
     <form method="post">
-	    <button class="microphone" type=submit name="synth" value={{ review['id'] }}><i class="fa fa-microphone"></i></button>
+	    <button class="microphone" type=submit name="synth" value={{ review['id'] }}><i style="background-color: inherit;" class="fa fa-microphone"></i></button>
     </form><br>
       {{ review['review'] }}<br><br>
     {{text[9]}}: {{ review['rev_rating'] }}/5<br>

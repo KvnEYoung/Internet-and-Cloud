@@ -64,11 +64,10 @@ def insert(mov_name, release_year, director, mov_rating,
   is inserted.
   """
   ds = get_client()
-  check = ds.query(kind='Movie')
-  check.add_filter('mov_name', '=', mov_name)
-  if check.fetch(1) is None:
+  key = ds.key('Movie', mov_name)
+  if ds.get(key) is None:
     with ds.transaction():
-      key = ds.key('Movie')
+      key = ds.key('Movie', mov_name)
       movie = datastore.Entity(key=key)
       movie.update({
         'mov_name': mov_name,
