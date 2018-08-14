@@ -3,6 +3,7 @@ from flask import current_app
 import six
 
 def translate_text(text):
+  '''Takes in input text and converts it to the selected language'''
   translate_client = translate.Client()
   language = current_app.config['LANGUAGE']
 
@@ -13,6 +14,6 @@ def translate_text(text):
   return result['translatedText']
 
 def translate_list(list):
-
+  '''Takes in list text and converts it to the selected language'''
 	list = [translate_text(item) for item in list]
 	return list

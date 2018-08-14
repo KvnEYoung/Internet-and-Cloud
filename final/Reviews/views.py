@@ -15,11 +15,12 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET', 'POST'])
 @views.route('/index', methods=['GET', 'POST'])
 def index():
-  """"
+  """
   Renders landing page for movie review site.
   POST request changes language setting
   """
-  model = get_model()
+
+  #Creates a list of the html page text and translates it for use in the index page.
   pageText = ['Welcome to Ripe Tomatoes', 'A fresher movie review site', 'Please select the review language',
   	'English', 'Spanish', 'Italian', 'Submit', 'Current language is', 'Movie Reviews', 'Add Movie Reviews']
   pageTranslation = translate_list(pageText)
@@ -56,6 +57,7 @@ def reviews():
       filename = read_text(text)
       return redirect(url_for('views.synth', filename=filename))
 
+  #Creates a list of the html page text and translates it for use in the reviews page.
   pageText = ['Movie Reviews!', 'Main Page', 'Add Movie Review', 'Directed By', 'Released', 'Rating', 'Runtime',
   	'Genre', 'Talk to me', 'Rating', 'Author']
   pageTranslation = translate_list(pageText)
@@ -67,7 +69,8 @@ def submit():
   """
   Renders submission form to submit a new movie review.
   """
-  model = get_model()
+
+  #Creates a list of the html page text and translates it for use in the submit page.
   pageText = ['Name of Movie', 'Released', 'Year', 'Director', 'Movie Rated', 'Not Rated',
   	'Runtime', 'minutes', 'Genres', "Write your review here", 'Rating', 'Reviewed by',
   	'Submit Review', 'Main Page']
@@ -82,6 +85,7 @@ def submit():
   genresTranslation = translate_list(genres)
 
   if request.method == 'POST':
+    model = get_model()
     genre_selected = [gen for gen in genres if gen in request.form]
     model.insert(request.form['mov_name'], request.form['release_year'], \
       request.form['director'], request.form['mov_rating'], \
@@ -94,7 +98,7 @@ def submit():
 
 @views.route('/synth/<filename>')
 def synth(filename):
-    model = get_model()
+
     bucket = storage.Client().get_bucket('lund-young-510')
     blob = bucket.get_blob(filename)
     audio = blob.public_url
@@ -102,5 +106,6 @@ def synth(filename):
     return render_template('synth.html', audio=audio, static_text=textTranslation)
 
 def full_language():
+  """Takes the encoded language and returns the full language for the index html page."""
   language = {'en': 'English', 'es': 'Spanish', 'it' : 'Italian'}
   return  translate_text(language[current_app.config['LANGUAGE']])
