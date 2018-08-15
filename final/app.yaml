@@ -3,4 +3,3 @@ env: flex
 runtime_config:
         python_version: 3
 entrypoint: gunicorn -b :$PORT main:app
-instance_class: f1-micro
