@@ -14,16 +14,16 @@
   {{ text[3] }}: {{ movies[movie]['director']}}<br>
   {{ text[4] }}: {{ movies[movie]['release_year'] }}<br>
   {{ text[5] }}: {{ movies[movie]['mov_rating'] }}<br>
-  {{ text[6] }}: {{ movies[movie]['runtime'] }} min<br>
-  {{ text[7] }}: {{ ', '.join(movies[movie]['genre']) }} <br><br>
+  {{ text[6] }}: {{ movies[movie]['runtime'] }} {{ text[7] }}<br>
+  {{ text[8] }}: {{ ', '.join(movies[movie]['genre']) }} <br><br>
   {% for review in reviews[movie] %}
   <div class="ele">
     <form method="post">
 	    <button class="microphone" type=submit name="synth" value={{ review['id'] }}><i style="background-color: inherit;" class="fa fa-microphone"></i></button>
     </form><br>
       {{ review['review'] }}<br><br>
-    {{ text[8] }}: {{ review['rev_rating'] }}/5<br>
-    {{ text[9] }}: {{ review['rev_name'] }}<br>
+    {{ text[9] }}: {{ review['rev_rating'] }}/5<br>
+    {{ text[10] }}: {{ review['rev_name'] }}<br>
 
   </div>
   {% endfor %}

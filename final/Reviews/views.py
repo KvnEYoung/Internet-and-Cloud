@@ -16,8 +16,8 @@ views = Blueprint('views', __name__)
 @views.route('/index', methods=['GET', 'POST'])
 def index():
   """
-  Renders landing page for movie review site.
-  POST request changes language setting
+  Renders landing page for movie review site. POST request changes language setting 
+  and redirects back to the index page to update the displayed language within.
   """
   # Creates a list of the html page text and translates it for use in the index page.
   pageText = ['Welcome to Ripe Tomatoes', 'A fresher movie review site', 'Please select the review language',
@@ -27,6 +27,7 @@ def index():
 
   if request.method == 'POST':
      lang = request.form['review_lang']
+     # Sets the configuration LANGUAGE variable to the desired displayed language and speech.
      current_app.config.update(LANGUAGE=lang)
      return redirect(url_for('views.index'))
 
@@ -50,7 +51,7 @@ def reviews():
   if request.method == 'POST':
       text = 'placeholder'
       id = int(request.form['synth'])
-      # Find text associated with review id
+      # Find text associated with review id.
       for row in reviews.values():
           for list_element in row:
               if id == list_element['id']:
@@ -58,9 +59,9 @@ def reviews():
       filename = read_text(text)
       return redirect(url_for('views.synth', filename=filename))
 
-  #Creates a list of the html page text and translates it for use in the reviews page.
+  # Creates a list of the html page text and translates it for use in the reviews page.
   pageText = ['Movie Reviews!', 'Main Page', 'Add Movie Review', 'Directed By', 'Released', 'Rating', 'Runtime',
-  	'Genre', 'Rating', 'Author']
+  	'minutes', 'Genre', 'Rating', 'Author']
   pageTranslation = translate_list(pageText)
 
   return render_template('reviews.html', movies=movies, reviews=reviews, text=pageTranslation)
@@ -71,7 +72,7 @@ def submit():
   Renders submission form to submit a new movie review.
   """
 
-  #Creates a list of the html page text and translates it for use in the submit page.
+  # Creates a list of the html page text and translates it for use in the submit page.
   pageText = ['Name of Movie', 'Released', 'Year', 'Director', 'Movie Rated', 'Not Rated',
   	'Runtime', 'minutes', 'Genres', "Write your review here", 'Rating', 'Reviewed by',
   	'Submit Review', 'Main Page']
@@ -106,12 +107,14 @@ def synth(filename):
     bucket = storage.Client().get_bucket(current_app.config['STORAGE'])
     blob = bucket.get_blob(filename)
     audio = blob.public_url
+
+    # Creates a list of the html page text and translates it for use in the synth page.
     pageText = ['Your browser does not support the audio element.', 'Movie Reviews']
     pageTranslation = translate_list(pageText)
 
     return render_template('synth.html', audio=audio, text=pageTranslation)
 
 def full_language():
-  """Takes the encoded language and returns the full language for the index html page."""
+  """ Takes the configuration LANGUAGE variable and returns the full language text. """
   language = {'en': 'English', 'es': 'Spanish', 'it' : 'Italian', 'fr': 'French', 'tr': 'Turkish', 'ko': 'Korean'}
   return  translate_text(language[current_app.config['LANGUAGE']])
