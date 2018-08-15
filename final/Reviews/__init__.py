@@ -11,7 +11,7 @@ def create_app(config):
     with app.app_context():
         model = get_model()
 
-    # Register the Movie Reviews blueprint
+    # Register the Movie Reviews blueprint.
     from .views import views
     app.register_blueprint(views)
 

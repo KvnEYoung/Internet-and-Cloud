@@ -3,26 +3,25 @@ from flask import current_app
 from google.cloud import datastore
 from .translate import translate_text, translate_list
 
-#  Movie Model
-#  Holds static details for a given movie
-#  :param mov_name: Name of the movie
-#  :param director: Director
-#  :param mov_rating: MPAA rating (i.e G, PG-13, R, etc)
-#  :param runtime: Runtime in minutes
-#  :param genre: Genre categories for a movie. Multiple genres are allowed. Stored in a single string
-#  with each value seperated by a comma
+# Movie Model
+# Holds static details for a given movie.
+# :param mov_name: Name of the movie
+# :param director: Director
+# :param mov_rating: MPAA rating (i.e G, PG-13, R, etc)
+# :param runtime: Runtime in minutes
+# :param genre: Genre categories for a movie. Multiple genres are allowed. Stored in a single string
+# with each value seperated by a comma.
 
-#  Review Model
-#  Hold reviews. mov_name acts as a key to associate each entry with Movie model
-#  :param mov_name: Name of the movie
-#  :param review: Text of the review
-#  :param rev_name: Reviewers Name
-#  :param rev_rating: Reviewers rating, 1-5
-#  '''
+# Review Model
+# Hold reviews. mov_name acts as a key to associate each entry with Movie model.
+# :param mov_name: Name of the movie
+# :param review: Text of the review
+# :param rev_name: Reviewers Name
+# :param rev_rating: Reviewers rating, 1-5
 
 def get_client():
     """
-    Returns datastore client connection
+    Returns datastore client connection.
     """
     return datastore.Client(current_app.config['PROJECT_ID'])
 
