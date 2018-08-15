@@ -3,34 +3,33 @@ from flask import current_app
 from google.cloud import datastore
 from .translate import translate_text, translate_list
 
-#  Movie Model
-#  Holds static details for a given movie
-#  :param mov_name: Name of the movie
-#  :param director: Director
-#  :param mov_rating: MPAA rating (i.e G, PG-13, R, etc)
-#  :param runtime: Runtime in minutes
-#  :param genre: Genre categories for a movie. Multiple genres are allowed. Stored in a single string
-#  with each value seperated by a comma
+# Movie Model
+# Holds static details for a given movie.
+# :param mov_name: Name of the movie
+# :param director: Director
+# :param mov_rating: MPAA rating (i.e G, PG-13, R, etc)
+# :param runtime: Runtime in minutes
+# :param genre: Genre categories for a movie. Multiple genres are allowed. Stored in a single string
+# with each value seperated by a comma.
 
-#  Review Model
-#  Hold reviews. mov_name acts as a key to associate each entry with Movie model
-#  :param mov_name: Name of the movie
-#  :param review: Text of the review
-#  :param rev_name: Reviewers Name
-#  :param rev_rating: Reviewers rating, 1-5
-#  '''
-
-def init_app(app):
-    pass
+# Review Model
+# Hold reviews. mov_name acts as a key to associate each entry with Movie model.
+# :param mov_name: Name of the movie
+# :param review: Text of the review
+# :param rev_name: Reviewers Name
+# :param rev_rating: Reviewers rating, 1-5
 
 def get_client():
+    """
+    Returns datastore client connection.
+    """
     return datastore.Client(current_app.config['PROJECT_ID'])
 
 def select():
   """
   Retrieves information from movies and reviews databases. Inserts both into
   dictionaries using the movie's name as the keyself.
-  :return List of dictionaries. Movies database in index 0, review database in index 1self.
+  :return List of dictionaries. Movies database in index 0, reviews database in index 1.
   """
   ds = get_client()
   movies_query = ds.query(kind='Movie', order=['mov_name']).fetch()

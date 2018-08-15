@@ -3,9 +3,9 @@
 import Reviews
 import config
 
-'''
-Runs app factory to create Movie Review app
-'''
+"""
+Runs app factory to create Movie Review app.
+"""
 app = Reviews.create_app(config)
 
 if __name__ == '__main__':

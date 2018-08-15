@@ -2,46 +2,46 @@
 {% block title %} Submit New Review {% endblock %}
 {% block content %}
 <table class="card">
-  <form method='post'>
+  <form method="POST">
     <tr>
-      <td><label for="mov_name">{{text[0]}}: </label></td>
+      <td><label for="mov_name">{{ text[0] }}: </label></td>
       <td><input class="entry_field" type="text" name="mov_name" required></td>
     </tr>
     <tr>
-    <td><label for="release_year">{{text[1]}} ({{text[2]}}): </label></td>
+    <td><label for="release_year">{{ text[1] }} ({{ text[2] }}): </label></td>
     <td><input class="entry_field" type="number" name="release_year" min="1895" max="2018" required></td>
   </tr>
   <tr>
-    <td><label for="director">{{text[3]}}: </label></td>
+    <td><label for="director">{{ text[3] }}: </label></td>
     <td><input class="entry_field" type="text" name="director" required></td>
   </tr>
   <tr>
-    <td><label for="mov_rating">{{text[4]}}: </label></td>
+    <td><label for="mov_rating">{{ text[4] }}: </label></td>
     <td>
       <input type="radio" name="mov_rating" value="G">G
       <input type="radio" name="mov_rating" value="PG">PG
       <input type="radio" name="mov_rating" value="PG-13" checked>PG-13
       <input type="radio" name="mov_rating" value="R">R
       <input type="radio" name="mov_rating" value="NC-17">NC-17
-      <input type="radio" name="mov_rating" value="Not Rated">{{text[5]}}
+      <input type="radio" name="mov_rating" value="Not Rated">{{ text[5] }}
     </td>
   </tr>
   <tr>
-    <td><label for="runtime">{{text[6]}} ({{text[7]}}): </label></td>
+    <td><label for="runtime">{{ text[6] }} ({{ text[7] }}): </label></td>
     <td><input class="entry_field" type="number" name="runtime" required></td>
     </tr>
     <tr>
-      <td><label for="genre"> {{text[8]}}: </label></td>
+      <td><label for="genre"> {{ text[8] }}: </label></td>
       <td>{% for g in genres %}
         <input type="checkbox" name="{{ g }}"> {{ g }}
         {% endfor %}
       </td>
     </tr>
     <tr>
-      <td colspan="4"><textarea name="review" rows="20" cols="40" placeholder="{{text[9]}}" required></textarea></td>
+      <td colspan="4"><textarea name="review" rows="20" cols="40" placeholder="{{ text[9] }}" required></textarea></td>
     </tr>
     <tr>
-      <td><label for="rev_rating">{{text[10]}}: </label></td>
+      <td><label for="rev_rating">{{ text[10] }}: </label></td>
       <td>
         <input type="radio" name="rev_rating" value=1>1
         <input type="radio" name="rev_rating" value=2>2
@@ -51,18 +51,20 @@
       </td>
     </tr>
     <tr>
-      <td><label for="rev_name">{{text[11]}}: </label></td>
+      <td><label for="rev_name">{{ text[11] }}: </label></td>
       <td><input class="entry_field" type="text" name="rev_name" required></td>
     </tr>
     <tr><td>
-      <button type="submit" style="background-color:#008CBA; color:white; border-radius: 6px; padding-left: 1.6em; padding-right: 1.6em;">{{text[12]}}</button></td></tr>
+      <button onMouseOver="this.style.backgroundColor='#89B0BD'" onMouseOut="this.style.backgroundColor='#008CBA'" type="submit" 
+      style="background-color:#008CBA; color:white; border-radius: 6px; padding-left: 1.6em; padding-right: 1.6em;">{{ text[12] }}</button></td></tr>
     </form>
 
     </table>
     <br>
     <center>
     	<form>
-    		<button type="submit" formaction="{{ url_for('views.index') }}" style="background-color:#4d0099; color:white; border-radius: 6px; padding-left: 2.6em; padding-right: 2.6em;">{{text[13]}}</button>
+    		<button onMouseOver="this.style.backgroundColor='#856E9B'" onMouseOut="this.style.backgroundColor='#4d0099'" type="submit" formaction="{{ url_for('views.index') }}" 
+    		style="background-color:#4d0099; color:white; border-radius: 6px; padding-left: 2.6em; padding-right: 2.6em;">{{ text[13] }}</button>
     	</form>
     </center>
 
