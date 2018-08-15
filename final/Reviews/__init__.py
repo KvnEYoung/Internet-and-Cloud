@@ -1,9 +1,9 @@
 from flask import current_app, Flask, redirect, url_for
 
 def create_app(config):
-    '''
-    Creates and returns app using flask app factory model
-    '''
+    """
+    Creates and returns app using flask app factory model.
+    """
     app = Flask(__name__)
     app.config.from_object(config)
 
@@ -23,9 +23,9 @@ def create_app(config):
 
 
 def get_model():
-    ''''
-    Imports and returns datastore model
-    '''
+    """
+    Imports and returns datastore model.
+    """
     model_backend = current_app.config['DATA_BACKEND']
     if model_backend == 'datastore':
         from . import model_datastore
@@ -33,6 +33,6 @@ def get_model():
     else:
         raise ValueError(
             "No appropriate databackend configured. "
-            "Please specify datastore, cloudsql, or mongodb")
+            "Please specify datastore, cloudsql, or mongodb.")
 
     return model

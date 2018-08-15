@@ -21,16 +21,16 @@ from .translate import translate_text, translate_list
 #  '''
 
 def get_client():
-    '''
+    """
     Returns datastore client connection
-    '''
+    """
     return datastore.Client(current_app.config['PROJECT_ID'])
 
 def select():
   """
   Retrieves information from movies and reviews databases. Inserts both into
   dictionaries using the movie's name as the keyself.
-  :return List of dictionaries. Movies database in index 0, review database in index 1self.
+  :return List of dictionaries. Movies database in index 0, reviews database in index 1.
   """
   ds = get_client()
   movies_query = ds.query(kind='Movie', order=['mov_name']).fetch()

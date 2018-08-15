@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # Copyright (c) 2018 Jeff Lund, Kevin Young
-'''
+"""
 Movie review flask app
-'''
+"""
 
 from flask import Flask, redirect, request, url_for, render_template, current_app, Blueprint
 from Reviews import get_model
@@ -38,9 +38,9 @@ def index():
 def reviews():
   """
   Renders all reviews from the model.
-  POST request redirects to synth page where an audio element plays the spoken text of the selected review
+  POST request redirects to synth page where an audio element plays the spoken text of the selected review.
   """
-  # Databases returned in tuple (Movie, Review)
+  # Databases returned in tuple (Movie, Review).
   # Must be unpacked before use in render template.
   model = get_model()
   dbs = model.select()
@@ -74,7 +74,7 @@ def submit():
 
   # Creates a list of the html page text and translates it for use in the submit page.
   pageText = ['Name of Movie', 'Released', 'Year', 'Director', 'Movie Rated', 'Not Rated',
-  	'Runtime', 'minutes', 'Genres', "Write your review here", 'Rating', 'Reviewed by',
+  	'Runtime', 'minutes', 'Genres', 'Write your review here', 'Rating', 'Reviewed by',
   	'Submit Review', 'Main Page']
 
   # Defines available genres for the a movie. Makes list available in GET and POST.
@@ -100,10 +100,10 @@ def submit():
 
 @views.route('/synth/<filename>')
 def synth(filename):
-    '''
+    """
     Loads a given mp3 file from storage bucket to HTML5 audio element. 
-    Used to play audio reviews generated from Text-to-Speech API
-    '''
+    Used to play audio reviews generated from Text-to-Speech API.
+    """
     bucket = storage.Client().get_bucket(current_app.config['STORAGE'])
     blob = bucket.get_blob(filename)
     audio = blob.public_url
@@ -115,6 +115,8 @@ def synth(filename):
     return render_template('synth.html', audio=audio, text=pageTranslation)
 
 def full_language():
-  """ Takes the configuration LANGUAGE variable and returns the full language text. """
+  """ 
+  Takes the configuration LANGUAGE variable and returns the full language text. 
+  """
   language = {'en': 'English', 'es': 'Spanish', 'it' : 'Italian', 'fr': 'French', 'tr': 'Turkish', 'ko': 'Korean'}
   return  translate_text(language[current_app.config['LANGUAGE']])
