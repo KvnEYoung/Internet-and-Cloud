@@ -111,3 +111,11 @@ textarea {
   font-size: 24px;
   float: right;
 }
+
+.custom_btn1:hover {
+  background-color: #856E9B;
+}
+
+.custombtn2:hover {
+  background-color: #89B0BD;
+}
