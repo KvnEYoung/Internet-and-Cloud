@@ -112,22 +112,3 @@ textarea {
   float: right;
 }
 
-.custom_btn1 {
-  background-color:#4d0099; 
-  color:white; 
-  border-radius: 6px;
-}
-
-.custom_btn2 {
-  background-color:#008CBA; 
-  color:white; 
-  border-radius: 6px
-}
-
-.custom_btn1:hover {
-  background-color: #856E9B;
-}
-
-.custom_btn2:hover {
-  background-color: #89B0BD;
-}
