@@ -19,8 +19,7 @@ def index():
   Renders landing page for movie review site.
   POST request changes language setting
   """
-
-  #Creates a list of the html page text and translates it for use in the index page.
+  # Creates a list of the html page text and translates it for use in the index page.
   pageText = ['Welcome to Ripe Tomatoes', 'A fresher movie review site', 'Please select the review language',
   	'English', 'French', 'Italian', 'Korean', 'Spanish', 'Turkish', 'Submit', 'Current language is', 
     'Movie Reviews', 'Add Movie Reviews']
@@ -38,6 +37,7 @@ def index():
 def reviews():
   """
   Renders all reviews from the model.
+  POST request redirects to synth page where an audio element plays the spoken text of the selected review
   """
   # Databases returned in tuple (Movie, Review)
   # Must be unpacked before use in render template.
@@ -50,7 +50,7 @@ def reviews():
   if request.method == 'POST':
       text = 'placeholder'
       id = int(request.form['synth'])
-      # Find text associated with review id - super ugly
+      # Find text associated with review id
       for row in reviews.values():
           for list_element in row:
               if id == list_element['id']:
@@ -99,11 +99,13 @@ def submit():
 
 @views.route('/synth/<filename>')
 def synth(filename):
-    bucket = storage.Client().get_bucket('lund-young-510')
+    '''
+    Loads a given mp3 file from storage bucket to HTML5 audio element. 
+    Used to play audio reviews generated from Text-to-Speech API
+    '''
+    bucket = storage.Client().get_bucket(current_app.config['STORAGE'])
     blob = bucket.get_blob(filename)
     audio = blob.public_url
-    
-    #Creates a list of the html page text and translates it for use in the synth page.
     pageText = ['Your browser does not support the audio element.', 'Movie Reviews']
     pageTranslation = translate_list(pageText)
 

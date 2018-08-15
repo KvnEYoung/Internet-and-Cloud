@@ -20,10 +20,10 @@ from .translate import translate_text, translate_list
 #  :param rev_rating: Reviewers rating, 1-5
 #  '''
 
-def init_app(app):
-    pass
-
 def get_client():
+    '''
+    Returns datastore client connection
+    '''
     return datastore.Client(current_app.config['PROJECT_ID'])
 
 def select():
