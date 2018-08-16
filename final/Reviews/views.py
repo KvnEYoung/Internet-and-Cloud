@@ -11,7 +11,6 @@ from .translate import translate_text, translate_list
 from google.cloud import storage
 
 views = Blueprint('views', __name__)
-language = 'en'
 
 @views.route('/<language>', methods=['GET', 'POST'])
 @views.route('/index/<language>', methods=['GET', 'POST'])
