@@ -3,12 +3,13 @@ from flask import current_app
 import html.parser as htmlparser
 import six
 
-def translate_text(text, language):
+def translate_text(text, lang):
   """ 
   Takes in input text and utilizes Google's Translate API to convert 
   it to the selected language. 
   """
   translate_client = translate.Client() 
+  language = lang
 
   if isinstance(text, six.binary_type):
     text = text.decode('utf-8')
