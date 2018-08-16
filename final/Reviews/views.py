@@ -13,14 +13,13 @@ from google.cloud import storage
 views = Blueprint('views', __name__)
 language = 'en'
 
-@views.route('/', methods=['GET', 'POST'])
-@views.route('/index', methods=['GET', 'POST'])
-def index():
+@views.route('/<language>', methods=['GET', 'POST'])
+@views.route('/index/<language>', methods=['GET', 'POST'])
+def main(language):
   """
   Renders landing page for movie review site. POST request changes language setting 
   and redirects back to the index page to update the displayed language within.
   """
-  global language
   # Creates a list of the html page text and translates it for use in the index page.
   pageText = ['Welcome to Ripe Tomatoes', 'A fresher movie review site', 'Please select the review language',
   	'English', 'French', 'Italian', 'Korean', 'Spanish', 'Turkish', 'Submit', 'Current language is', 
@@ -30,13 +29,12 @@ def index():
   if request.method == 'POST':
      # Sets the configuration LANGUAGE variable to the desired displayed language and speech.
      language = request.form['review_lang']
-     return redirect(url_for('views.index'))
+     return redirect(url_for('views.main', language=language))
 
-  return render_template('index.html', language=full_language(), text=pageTranslation)
+  return render_template('index.html', lang=full_language(language), text=pageTranslation, language=language)
 
-
-@views.route('/reviews', methods=['GET', 'POST'])
-def reviews():
+@views.route('/reviews/<language>', methods=['GET', 'POST'])
+def reviews(language):
   """
   Renders all reviews from the model.
   POST request redirects to synth page where an audio element plays the spoken text of the selected review.
@@ -44,7 +42,6 @@ def reviews():
   # Databases returned in tuple (Movie, Review).
   # Must be unpacked before use in render template.
   model = get_model()
-  global language
   dbs = model.select(language)
   if dbs is None:
       dbs = [[],[]]
@@ -59,17 +56,17 @@ def reviews():
               if id == list_element['id']:
                   text = list_element['review']
       filename = read_text(text, language)
-      return redirect(url_for('views.synth', filename=filename))
+      return redirect(url_for('views.synth', filename=filename, language=language))
 
   # Creates a list of the html page text and translates it for use in the reviews page.
   pageText = ['Movie Reviews!', 'Main Page', 'Add Movie Review', 'Directed By', 'Released', 'Rating', 'Runtime',
   	'minutes', 'Genre', 'Rating', 'Author']
   pageTranslation = translate_list(pageText, language)
 
-  return render_template('reviews.html', movies=movies, reviews=reviews, text=pageTranslation)
+  return render_template('reviews.html', movies=movies, reviews=reviews, text=pageTranslation, language=language)
 
-@views.route('/submit', methods=['GET', 'POST'])
-def submit():
+@views.route('/submit/<language>', methods=['GET', 'POST'])
+def submit(language):
   """
   Renders submission form to submit a new movie review.
   """
@@ -83,7 +80,6 @@ def submit():
     'Documentary', 'Drama', 'Family', 'Fantasy', 'Film Noir', 'History', 'Horror', \
     'Indie','Music', 'Musical', 'Mystery', 'Romance', 'Sci-Fi', 'Short', 'Sport', \
     'Superhero', 'Thiller', 'War', 'Western']
-  global language
   pageTranslation = translate_list(pageText, language)
   genresTranslation = translate_list(genres, language)
 
@@ -95,12 +91,12 @@ def submit():
       request.form['runtime'], ','.join(genre_selected), request.form['review'], \
       request.form['rev_name'], request.form['rev_rating'])
 
-    return redirect(url_for('views.reviews'))
+    return redirect(url_for('views.reviews', language=language))
 
-  return render_template('submit.html', genres=genresTranslation, text=pageTranslation)
+  return render_template('submit.html', genres=genresTranslation, text=pageTranslation, language=language)
 
-@views.route('/synth/<filename>')
-def synth(filename):
+@views.route('/synth/<filename>/<language>')
+def synth(filename, language):
     """
     Loads a given mp3 file from storage bucket to HTML5 audio element. 
     Used to play audio reviews generated from Text-to-Speech API.
@@ -111,15 +107,13 @@ def synth(filename):
 
     # Creates a list of the html page text and translates it for use in the synth page.
     pageText = ['Your browser does not support the audio element.', 'Movie Reviews']
-    global language
     pageTranslation = translate_list(pageText, language)
 
-    return render_template('synth.html', audio=audio, text=pageTranslation)
+    return render_template('synth.html', audio=audio, text=pageTranslation, language=language)
 
-def full_language():
+def full_language(language):
   """ 
   Takes the configuration LANGUAGE variable and returns the full language text. 
   """
-  global language
   lang = {'en': 'English', 'es': 'Spanish', 'it' : 'Italian', 'fr': 'French', 'tr': 'Turkish', 'ko': 'Korean'}
   return  translate_text(lang[language], language)

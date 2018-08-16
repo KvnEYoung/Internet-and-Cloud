@@ -17,7 +17,8 @@ def create_app(config):
 
     @app.route("/")
     def index():
-        return redirect(url_for('views.index'))
+        language = 'en'
+        return redirect(url_for('views.main', language=language))
 
     return app
 

@@ -63,7 +63,7 @@
     <br>
     <center>
     	<form>
-    		<button onMouseOver="this.style.backgroundColor='#856E9B'" onMouseOut="this.style.backgroundColor='#4d0099'" type="submit" formaction="{{ url_for('views.index') }}" 
+    		<button onMouseOver="this.style.backgroundColor='#856E9B'" onMouseOut="this.style.backgroundColor='#4d0099'" type="submit" formaction="{{ url_for('views.main', language=language) }}" 
     		style="background-color:#4d0099; color:white; border-radius: 6px; padding-left: 2.6em; padding-right: 2.6em;">{{ text[13] }}</button>
     	</form>
     </center>
