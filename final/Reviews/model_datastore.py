@@ -25,7 +25,7 @@ def get_client():
     """
     return datastore.Client(current_app.config['PROJECT_ID'])
 
-def select():
+def select(language):
   """
   Retrieves information from movies and reviews databases. Inserts both into
   dictionaries using the movie's name as the keyself.
@@ -33,22 +33,22 @@ def select():
   """
   ds = get_client()
   movies_query = ds.query(kind='Movie', order=['mov_name']).fetch()
-  movies = {translate_text(m['mov_name']): {
+  movies = {translate_text(m['mov_name'], language): {
       'release_year': m['release_year'],
       'director': m['director'],
       'mov_rating': m['mov_rating'],
       'runtime': m['runtime'],
-      'genre': translate_list(m['genre'].split(','))}
+      'genre': translate_list(m['genre'].split(','), language)}
       for m in movies_query}
   review_query = ds.query(kind='Review').fetch()
   reviews = dict()
   id = 0
   for row in review_query:
-    if translate_text(row['mov_name']) not in reviews:
-      reviews[translate_text(row['mov_name'])] = []
+    if translate_text(row['mov_name'], language) not in reviews:
+      reviews[translate_text(row['mov_name'], language)] = []
 
-    reviews[translate_text(row['mov_name'])].append({
-      'review':translate_text(row['review']),
+    reviews[translate_text(row['mov_name'], language)].append({
+      'review':translate_text(row['review'], language),
       'rev_name':row['rev_name'],
       'rev_rating':row['rev_rating'],
       'id': id})
