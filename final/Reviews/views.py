@@ -20,13 +20,13 @@ def main(language):
   and redirects back to the index page to update the displayed language within.
   """
   # Creates a list of the html page text and translates it for use in the index page.
-  pageText = ['Welcome to Ripe Tomatoes', 'A fresher movie review site', 'Please select the review language',
+  pageText = ['Ripe Tomatoes', 'Welcome to Ripe Tomatoes', 'A fresher movie review site', 'Please select the review language',
   	'English', 'French', 'Italian', 'Korean', 'Spanish', 'Turkish', 'Submit', 'Current language is', 
     'Movie Reviews', 'Add Movie Reviews']
   pageTranslation = translate_list(pageText, language)
 
   if request.method == 'POST':
-     # Sets the configuration LANGUAGE variable to the desired displayed language and speech.
+     # Sets the language variable to the desired displayed language and speech.
      language = request.form['review_lang']
      return redirect(url_for('views.main', language=language))
 
@@ -58,7 +58,7 @@ def reviews(language):
       return redirect(url_for('views.synth', filename=filename, language=language))
 
   # Creates a list of the html page text and translates it for use in the reviews page.
-  pageText = ['Movie Reviews!', 'Main Page', 'Add Movie Review', 'Directed By', 'Released', 'Rating', 'Runtime',
+  pageText = ['Ripe Tomatoes', 'Movie Reviews!', 'Main Page', 'Add Movie Review', 'Directed By', 'Released', 'Rating', 'Runtime',
   	'minutes', 'Genre', 'Rating', 'Author']
   pageTranslation = translate_list(pageText, language)
 
@@ -70,11 +70,11 @@ def submit(language):
   Renders submission form to submit a new movie review.
   """
   # Creates a list of the html page text and translates it for use in the submit page.
-  pageText = ['Name of Movie', 'Released', 'Year', 'Director', 'Movie Rated', 'Not Rated',
+  pageText = ['Ripe Tomatoes', 'Name of Movie', 'Released', 'Year', 'Director', 'Movie Rated', 'Not Rated',
   	'Runtime', 'minutes', 'Genres', 'Write your review here', 'Rating', 'Reviewed by',
   	'Submit Review', 'Main Page']
 
-  # Defines available genres for the a movie. Makes list available in GET and POST.
+  # Defines available genres for the movie. Makes list available in GET and POST.
   genres = ['Action', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', \
     'Documentary', 'Drama', 'Family', 'Fantasy', 'Film Noir', 'History', 'Horror', \
     'Indie','Music', 'Musical', 'Mystery', 'Romance', 'Sci-Fi', 'Short', 'Sport', \
@@ -105,14 +105,14 @@ def synth(filename, language):
     audio = blob.public_url
 
     # Creates a list of the html page text and translates it for use in the synth page.
-    pageText = ['Your browser does not support the audio element.', 'Movie Reviews']
+    pageText = ['Ripe Tomatoes', 'Your browser does not support the audio element.', 'Movie Reviews']
     pageTranslation = translate_list(pageText, language)
 
     return render_template('synth.html', audio=audio, text=pageTranslation, language=language)
 
 def full_language(language):
   """ 
-  Takes the configuration LANGUAGE variable and returns the full language text. 
+  Takes the language variable and returns the full language text. 
   """
   lang = {'en': 'English', 'es': 'Spanish', 'it' : 'Italian', 'fr': 'French', 'tr': 'Turkish', 'ko': 'Korean'}
   return  translate_text(lang[language], language)
