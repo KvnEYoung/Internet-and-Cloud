@@ -8,8 +8,15 @@ def translate_text(text, lang):
   Takes in input text and utilizes Google's Translate API to convert 
   it to the selected language. 
   """
-  translate_client = translate.Client() 
-  language = lang
+  translate_client = translate.Client()
+  
+  # Takes the input language and returns the string abbreviation for the translate file
+  # This resolves the Google API invalid input error when passing the lang parameter.
+  langDict = {'en': 'English', 'es': 'Spanish', 'it' : 'Italian', 'fr': 'French', 'tr': 'Turkish', 'ko': 'Korean'}
+  language = ''
+  for abbrev, fullLanguage in langDict.items():
+    if fullLanguage == langDict[lang]:
+        language = abbrev
 
   if isinstance(text, six.binary_type):
     text = text.decode('utf-8')
