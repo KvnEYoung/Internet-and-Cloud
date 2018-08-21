@@ -1,5 +1,8 @@
 env/
+venv/
 *.pyc
 lib
-__pycache__/
+*__pycache__/
 .vscode/
+*.swp
+*.db
